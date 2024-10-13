@@ -408,8 +408,8 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
+$config['cookie_prefix']	= getenv("COOKIE_PREFIX", "DEDIS_");
+$config['cookie_domain']	= getenv("COOKIE_DOMAIN",'student.famnit.upr.si');
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;
