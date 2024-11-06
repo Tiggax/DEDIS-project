@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Test_01_Controller extends CI_Controller {
+class Special_Controller extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,10 +20,17 @@ class Test_01_Controller extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('header');
-		$this->load->view('welcome_test01');
-		$this->load->
-		view('footer');
+		
 	}
+    public function special_test($name,$number, $subtract)
+    {
+        $this->load->view('header');
+        $this -> load->view('level_test');
+		$diff = $number - $subtract;
+		echo "No help variable: <br> Name: " . $name . "<br> First number: " . $number . "<br> Second number: " . $subtract . "<br> Difference: " . ($number-$subtract);
+		echo "<br> <h3>Help variable: </h3> <br>" . $name . "<br> <h5>" . $diff . "</h5>";
+		
+        $this->load->view('footer');
+    }
 	
 }
