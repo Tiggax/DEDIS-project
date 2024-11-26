@@ -25,10 +25,14 @@ class Special_Controller extends CI_Controller {
     public function special_test($name,$number, $subtract)
     {
         $this->load->view('header');
-        $this -> load->view('level_test');
+        #$this -> load->view('level_test');
 		$diff = $number - $subtract;
-		echo "No help variable: <br> Name: " . $name . "<br> First number: " . $number . "<br> Second number: " . $subtract . "<br> Difference: " . ($number-$subtract);
-		echo "<br> <h3>Help variable: </h3> <br>" . $name . "<br> <h5>" . $diff . "</h5>";
+
+		$this->load->library('parser');
+		$this->load->parser->parse('level_test',$number);
+		
+		#echo "No help variable: <br> Name: " . $name . "<br> First number: " . $number . "<br> Second number: " . $subtract . "<br> Difference: " . ($number-$subtract);
+		#echo "<br> <h3>Help variable: </h3> <br>" . $name . "<br> <h5>" . $diff . "</h5>";
 		
         $this->load->view('footer');
     }

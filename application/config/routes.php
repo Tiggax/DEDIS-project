@@ -53,4 +53,5 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['test'] = "Test_01_Controller";
-$route['level1/(:any)/(:num)/(:num)']= "Special_Controller/special_test/$1/$2/$3";
+$route['level/(:any)/(:num)/(:num)']= "Special_Controller/special_test/$1/$2/$3";
+$route['hashpass/(:any)/(:any)'] = "Password_Creation/create_password/$1/$2";
