@@ -1,0 +1,2 @@
+SECRET_KEY=
+# Optionally define DEBUG; if present django will start in dev mode
