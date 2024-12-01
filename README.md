@@ -32,6 +32,7 @@ which will... install all of the dependencies for the project
 
 After that, when you need to run the following code **only once**
 ```
+poetry run htmx_setup
 poetry run migrate
 poetry run python manage.py collectstatic
 poetry run python manage.py createsuperuser
