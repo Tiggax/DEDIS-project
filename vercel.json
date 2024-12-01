@@ -4,7 +4,11 @@
       {
         "src": "manage.py",
         "use": "@vercel/python",
-        "config": { "maxLambdaSize": "50mb" }
+        "config": { 
+            "runtime": "python3.12",
+            "installCommand": "poetry install --no-dev && poetry run setup_prod"
+
+        }
       },
       {
         "src": "static/**/*",

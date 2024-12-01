@@ -46,9 +46,11 @@ def download_file(url: str, name: str) -> None:
     if proc.returncode != 0:
         raise SystemExit(1)
     
-
-if __name__ == '__main__':
-    # runs production
+def setup_prod():
+    print("Setting up Production")
+    print("setting HTMX")
     setup_HTMX()
+    print("add static files")
+    manage("collectstatic")
+    print("setting migrations")
     migrate()
-    dev() # test
