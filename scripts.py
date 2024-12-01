@@ -45,3 +45,10 @@ def download_file(url: str, name: str) -> None:
     )
     if proc.returncode != 0:
         raise SystemExit(1)
+    
+
+if __name__ == '__main__':
+    # runs production
+    setup_HTMX()
+    migrate()
+    dev() # test
