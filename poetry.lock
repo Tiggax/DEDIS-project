@@ -50,6 +50,23 @@ django-excel-response2 = ">=3.0.0"
 django-six = "*"
 
 [[package]]
+name = "django-bootstrap5"
+version = "24.3"
+description = "Bootstrap 5 for Django"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_bootstrap5-24.3-py3-none-any.whl", hash = "sha256:98f7916f9f7f9c34dfe157f7c062a28ebf6d17ff95307bef260ba794ba34e2a0"},
+    {file = "django_bootstrap5-24.3.tar.gz", hash = "sha256:ca5ec5568fc2a3fc239f0cb8ce41a7df3802b8c4af930d7f64451784ec7ddc16"},
+]
+
+[package.dependencies]
+Django = ">=4.2"
+
+[package.extras]
+jinja = ["Jinja2 (>=3.0,<4)"]
+
+[[package]]
 name = "django-excel-response2"
 version = "3.0.6"
 description = "A function extends of Tarken's django-excel-response"
@@ -240,4 +257,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "e65191bcdd678a99133629f7a532dcb4ce6487b2327773c1591b718db452e672"
+content-hash = "24f6a626bb712ae7da84fc0c3ea56195869610f0da50d26d897816f0ccf11ad9"
