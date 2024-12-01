@@ -1,9 +1,25 @@
 {
+    "version": 2,
     "builds": [
-      {"src": "/scripts.py", "use": "@black-raven/vercel-poetry"}
+      {
+        "src": "manage.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "50mb" }
+      },
+      {
+        "src": "static/**/*",
+        "use": "@vercel/static"
+      }
     ],
     "routes": [
-      {"src": "/(.*)", "dest": "scripts.py"},
-      {"src": "/static/(.*)", "dest": "/static/$1"}
+      {
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "manage.py"
+      }
     ]
-}
+  }
+  
