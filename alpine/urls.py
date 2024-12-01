@@ -23,11 +23,15 @@ import pages.urls
 
 from . import views
 
+accounts = [
+    path('signup/', views.SignUpView.as_view(), name = "signup"),
+    path("", include("django.contrib.auth.urls")),
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include("api.urls")),
-    path('signup/', views.SignUpView.as_view(), name = "signup"),
-    path("accounts/", include("django.contrib.auth.urls")),
+    path('accounts/',include(accounts)),
     path('', include("pages.urls"))
 ]
 
