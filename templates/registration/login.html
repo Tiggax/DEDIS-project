@@ -1,1 +1,21 @@
-TODO registration
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<form method="post">
+
+    {% csrf_token %}
+    
+    {% for field in form %}
+    <div class="input-group mb-3">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+    {% endfor %}
+
+
+
+    <button type="submit">Sign Up</button>
+</form>
+
+{% endblock content %}

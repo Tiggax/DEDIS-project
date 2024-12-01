@@ -13,7 +13,7 @@ project is made with:
 - download the repo
 - if you have [nix (package manager)](https://nix.dev/install-nix) you can just run the flake to get all of the dependencies, but for the plebs:
     - python `>=3.11`
-    - poetry
+    - poetry (`pip install poetry` or `sudo apt install python3-poetry`)
 
 
 # getting the things working
