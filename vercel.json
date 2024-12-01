@@ -1,0 +1,9 @@
+{
+    "builds": [
+      {"src": "/alpine/main.py", "use": "@black-raven/vercel-poetry"}
+    ],
+    "routes": [
+      {"src": "/(.*)", "dest": "app/main.py"},
+      {"src": "/static/(.*)", "dest": "/static/$1"}
+    ]
+}
