@@ -10,11 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import json
 from pathlib import Path
-from dotenv import dotenv_values
+from os import environ
+
+cfg = environ
 
 
-cfg = dotenv_values()
+
+
+try:
+    PRE_ALLOWED_HOSTS = json.loads(cfg["ALLOWED_HOSTS"])
+except json.JSONDecodeError:
+    
+    raise ValueError("ALLOWED_HOSTS must be a list (['foo', 'bar'])")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,6 +43,7 @@ except KeyError as e:
 DEBUG = "DEBUG" in cfg
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS += PRE_ALLOWED_HOSTS if PRE_ALLOWED_HOSTS and type(PRE_ALLOWED_HOSTS) is list else []
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = "/"
