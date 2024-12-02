@@ -24,6 +24,11 @@
         "src": "/(.*)",
         "dest": "manage.py"
       }
-    ]
+    ],
+    "build": {
+        "env": {
+            "START_COMMAND": "python -m poetry run prod"
+        }
+    }
   }
   
