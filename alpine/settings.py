@@ -92,7 +92,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'alpine.wsgi.application'
+WSGI_APPLICATION = 'alpine.wsgi.app'
 
 
 # Database
