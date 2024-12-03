@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "python scripts.py:setup_prod",
+    "buildCommand": "sh vercel.sh",
     "builds": [
       {
         "src": "alpine/wsgi.py",
