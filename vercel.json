@@ -1,6 +1,17 @@
 {
     "version": 2,
     "outputDirectory": ".",
+    "builds": [
+        {
+            "src": "alpine/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "runtime": "python3.12",
+                "installCommand": "pip3 install poetry && python3 -m poetry install --no-dev",
+                "buildCommand": "python3 -m poetry run setup_prod"
+            }
+        }
+    ],
     "routes": [
         {
             "src": "/(.*)",
