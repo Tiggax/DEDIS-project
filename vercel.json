@@ -13,7 +13,7 @@
     ],
     "functions": {
         "alpine/wsgi.py": {
-            "runtime": "vercel-python@3.12"
+            "runtime": "0vercel/python@3.12"
         }
     }
   }
