@@ -10,7 +10,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "alpine/wsgi.py"
+            "dest": "api/wsgi.py"
         }
     ]
   }
