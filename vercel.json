@@ -1,14 +1,15 @@
 {
     "version": 2,
     "outputDirectory": ".",
+    "functions": {
+        "/alpine/wsgi.py": {
+            "runtime": "@vercel/python"
+        }
+    },
     "routes": [
       {
         "src": "/static/(.*)",
         "dest": "/static/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/alpine/wsgi.py"
       }
     ]
   }
