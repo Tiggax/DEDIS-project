@@ -7,7 +7,6 @@
         "config": { 
             "runtime": "python3.12",
             "installCommand": "poetry install --no-dev && poetry run setup_prod"
-
         }
       },
       {
@@ -28,7 +27,8 @@
     "build": {
         "env": {
             "START_COMMAND": "python -m poetry run prod"
-        }
+        },
+        "commands":"poetry run setup_prod"
     }
   }
   
