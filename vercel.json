@@ -1,5 +1,8 @@
 {
     "version": 2,
+    "buildCommand": "python3 -m poetry run setup_prod",
+    "outputDirectory": "static",
+    "installCommand": "pip3 install poetry && python3 -m poetry install --no-dev",
     "routes": [
         {
             "src": "/(.*)",
@@ -7,7 +10,7 @@
         },
         {
             "src": "/static/(.*)",
-            "dest": "static/$1"
+            "dest": "/static/$1"
         }
     ]
   }
