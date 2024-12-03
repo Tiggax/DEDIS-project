@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "buildCommand": "poetry run setup_prod",
     "builds": [
       {
         "src": "alpine/wsgi.py",
@@ -23,12 +24,6 @@
         "src": "/(.*)",
         "dest": "alpine/wsgi.py"
       }
-    ],
-    "build": {
-        "env": {
-            "START_COMMAND": "python -m poetry run prod"
-        },
-        "commands":"poetry run setup_prod"
-    }
+    ]
   }
   
