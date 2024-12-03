@@ -15,7 +15,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "api/wsgi.py"
+            "dest": "alpine/wsgi.py"
         },
         {
             "src": "/static/(.*)",
