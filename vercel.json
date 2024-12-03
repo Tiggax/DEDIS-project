@@ -3,7 +3,7 @@
     "outputDirectory": ".",
     "functions": {
         "alpine/wsgi.py": {
-            "runtime": "@vercel/python@3.12"
+            "runtime": "vercel-python@3.12"
         }
     },
     "routes": [
