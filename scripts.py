@@ -3,7 +3,10 @@ import os
 from pathlib import Path
 
 def manage(*args):
-    subprocess.run(["python", "manage.py"] + list(args))
+    proc = subprocess.run(["python", "manage.py"] + list(args))
+    print(proc.stderr)
+    print(proc.stdout)
+    print(f"Finished: {proc.returncode}")
 
 
 def dev():
@@ -45,3 +48,20 @@ def download_file(url: str, name: str) -> None:
     )
     if proc.returncode != 0:
         raise SystemExit(1)
+    
+def setup_prod():
+    print("Setting up Production")
+    print("setting HTMX")
+    setup_HTMX()
+    print("add static files")
+    manage("collectstatic")
+    print("setting migrations")
+    migrate()
+
+
+def prod():
+    print("Starting server...")
+    manage("runserver")
+
+if __name__ == '__main__':
+    globals()[sys.argv[1]]()
