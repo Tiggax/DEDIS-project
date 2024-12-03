@@ -1,12 +1,6 @@
 {
     "version": 2,
     "outputDirectory": ".",
-    "builds": [
-        {
-            "src": "alpine/wsgi.py",
-            "use": "@black-raven/vercel-poetry"
-        }
-    ],
     "routes": [
         {
             "src": "/(.*)",
