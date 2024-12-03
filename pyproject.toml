@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "api"
+name = "alpine"
 version = "0.1.0"
 description = "DEDIS project for alpinistic club"
 authors = ["Tilen Gimpelj <89201122@upr.si>"]

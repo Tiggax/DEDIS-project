@@ -16,9 +16,6 @@ from os import environ
 
 cfg = environ
 
-
-
-
 try:
     PRE_ALLOWED_HOSTS = json.loads(cfg["ALLOWED_HOSTS"])
 except json.JSONDecodeError:
@@ -40,6 +37,7 @@ except KeyError as e:
     raise RuntimeError("Could not find a SECRET_KEY") from e
 
 # SECURITY WARNING: don't run with debug turned on in production!
+print("DEBUG" in cfg)
 DEBUG = "DEBUG" in cfg
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -72,7 +70,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'api.urls'
+ROOT_URLCONF = 'alpine.urls'
 
 
 TEMPLATES = [
@@ -91,7 +89,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'api.wsgi.app'
+WSGI_APPLICATION = 'alpine.wsgi.app'
 
 
 # Database
