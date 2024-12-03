@@ -1,20 +1,6 @@
 {
     "version": 2,
     "buildCommand": "poetry run setup_prod",
-    "builds": [
-      {
-        "src": "alpine/wsgi.py",
-        "use": "@vercel/python",
-        "config": { 
-            "runtime": "python3.12",
-            "installCommand": "poetry install --no-dev && poetry run setup_prod"
-        }
-      },
-      {
-        "src": "static/**/*",
-        "use": "@vercel/static"
-      }
-    ],
     "routes": [
       {
         "src": "/static/(.*)",
