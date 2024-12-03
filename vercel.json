@@ -5,12 +5,12 @@
     "installCommand": "pip3 install poetry && python3 -m poetry install --no-dev",
     "routes": [
         {
-            "src": "/(.*)",
-            "dest": "api/wsgi.py"
-        },
-        {
             "src": "/static/(.*)",
             "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "api/wsgi.py"
         }
     ]
   }
