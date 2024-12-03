@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "postbuild": "poetry run setup_prod"
+    }
+}
