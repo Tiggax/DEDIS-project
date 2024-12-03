@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "poetry run setup_prod",
+    "buildCommand": "python scripts.py:setup_prod",
     "builds": [
       {
         "src": "alpine/wsgi.py",

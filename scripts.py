@@ -54,3 +54,11 @@ def setup_prod():
     manage("collectstatic")
     print("setting migrations")
     migrate()
+
+
+def prod():
+    print("Starting server...")
+    manage("runserver")
+
+if __name__ == '__main__':
+    globals()[sys.argv[1]]()
