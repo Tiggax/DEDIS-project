@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api.apps.ApiConfig',
     'pages.apps.pagesConfig',
     "django_bootstrap5",
 ]
@@ -73,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'alpine.urls'
+ROOT_URLCONF = 'api.urls'
 
 
 TEMPLATES = [
@@ -92,7 +91,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'alpine.wsgi.app'
+WSGI_APPLICATION = 'api.wsgi.app'
 
 
 # Database

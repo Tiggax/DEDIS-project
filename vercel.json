@@ -4,17 +4,12 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "alpine/wsgi.py"
+            "dest": "api/wsgi.py"
         },
         {
             "src": "/static/(.*)",
             "dest": "static/$1"
         }
-    ],
-    "functions": {
-        "alpine/wsgi.py": {
-            "runtime": "0vercel/python@3.12"
-        }
-    }
+    ]
   }
   
