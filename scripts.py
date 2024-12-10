@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 def manage(*args):
-    proc = subprocess.run(["python", "manage.py"] + list(args))
+    proc = subprocess.run(["python3", "manage.py"] + list(args))
     print(proc.stderr)
     print(proc.stdout)
     print(f"Finished: {proc.returncode}")
