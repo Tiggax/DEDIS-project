@@ -2,7 +2,7 @@
     "version": 2,
     "buildCommand": "python3 -m poetry run setup_prod",
     "outputDirectory": "static",
-    "installCommand": "pip3 install pysqlite3-binary setuptools poetry && python3 -m poetry install --no-dev",
+    "installCommand": "pip3 install setuptools poetry && python3 -m poetry install --no-dev",
     "routes": [
         {
             "src": "/static/(.*)",
