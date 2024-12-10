@@ -54,6 +54,8 @@ def setup_prod():
     print("setting HTMX")
     setup_HTMX()
     print("add static files")
+    dir = os.getcwd()
+    print(f"Working DIR: {dir}")
     manage("collectstatic")
     print("setting migrations")
     migrate()
