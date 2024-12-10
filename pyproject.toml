@@ -15,7 +15,6 @@ django-bootstrap5 = "^24.3"
 
 [tool.poetry.dev-dependencies]
 django-admin = "^2.0.2"
-pysqlite3-binary = "0.5.4"
 
 [build-system]
 requires = ["poetry-core"]
