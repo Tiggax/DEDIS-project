@@ -12,13 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 import json
 from pathlib import Path
-from os import environ
 
-cfg = environ
-
-print(cfg['ALLOWED_HOSTS'])
-
-
+from .__init__ import cfg
 
 try:
     PRE_ALLOWED_HOSTS = json.loads(cfg["ALLOWED_HOSTS"])
@@ -28,8 +23,7 @@ except json.JSONDecodeError:
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -41,7 +35,7 @@ except KeyError as e:
     raise RuntimeError("Could not find a SECRET_KEY") from e
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "DEBUG" in cfg
+# DEBUG = cfg["DEBUG"] # instanced in __init__
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ALLOWED_HOSTS += PRE_ALLOWED_HOSTS if PRE_ALLOWED_HOSTS and type(PRE_ALLOWED_HOSTS) is list else []
@@ -146,4 +140,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # BOOTSTRAP5
 BOOTSTRAP5 = {
     "javascript_in_head": True,
+}
+
+
+LOGGING = {
+    "version": 1,  # the dictConfig format version
+    "disable_existing_loggers": False,  # retain the default loggers
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "general.log",
+        },
+    },
 }

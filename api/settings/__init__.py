@@ -1,11 +1,22 @@
+from split_settings.tools import include
+import logging
+logger = logging.getLogger(__name__)
+
 import os
+from dotenv import load_dotenv, dotenv_values
+load_dotenv()
+
+from os import environ
 
 
-print(os.environ.get("ENV_TYPE"))
 
+cfg = environ
 
-from .default import *
+DEBUG = "DEBUG" in dotenv_values()
+
+include("default.py", scope = globals())
+
 if os.environ.get("ENV_TYPE") in ['Production', "prod", "Prod"]:
-    from .prod import *
+    include("prod.py", scope = globals())
 else:
-    from .dev import *
+    include("dev.py", scope = globals())

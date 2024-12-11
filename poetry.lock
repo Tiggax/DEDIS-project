@@ -93,6 +93,17 @@ files = [
 ]
 
 [[package]]
+name = "django-split-settings"
+version = "1.3.2"
+description = "Organize Django settings into multiple files and directories. Easily override and modify settings. Use wildcards and optional settings files."
+optional = false
+python-versions = "<4.0,>=3.9"
+files = [
+    {file = "django_split_settings-1.3.2-py3-none-any.whl", hash = "sha256:72bd7dd9f12602585681074d1f859643fb4f6b196b584688fab86bdd73a57dff"},
+    {file = "django_split_settings-1.3.2.tar.gz", hash = "sha256:d3975aa3601e37f65c59b9977b6bcb1de8bc27496930054078589c7d56998a9d"},
+]
+
+[[package]]
 name = "excel-base"
 version = "1.0.4"
 description = "Excel Base"
@@ -257,4 +268,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "24f6a626bb712ae7da84fc0c3ea56195869610f0da50d26d897816f0ccf11ad9"
+content-hash = "7c79ba4ba53a7e136a1b553dabe3b6033313f3257d8416d2cb53bc5e0aedabd1"
