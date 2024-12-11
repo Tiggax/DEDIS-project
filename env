@@ -1,2 +1,13 @@
 SECRET_KEY=
 # Optionally define DEBUG; if present django will start in dev mode
+
+ALLOWED_HOSTS=
+#SET THE ENVIRONMENT TYPE
+ENV_TYPE= # "prod" or "dev"
+
+# FOR PRODUCTION
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
