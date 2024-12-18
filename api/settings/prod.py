@@ -5,7 +5,7 @@ from .default import *
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.db.backends.mysql",
         "NAME": cfg["DB_NAME"],
         "USER": cfg["DB_USER"],
         "PASSWORD": cfg["DB_PASSWORD"],

@@ -63,6 +63,7 @@ def setup_prod():
 
 def prod():
     print("Starting server...")
+    os.environ.setdefault("ENV_TYPE","production")
     manage("runserver")
 
 if __name__ == '__main__':

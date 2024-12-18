@@ -16,7 +16,11 @@ DEBUG = "DEBUG" in dotenv_values()
 
 include("default.py", scope = globals())
 
-if os.environ.get("ENV_TYPE") in ['Production', "prod", "Prod"]:
+ENV_TYPE = os.environ.get("ENV_TYPE")
+
+print(f"Environment: {ENV_TYPE}")
+
+if ENV_TYPE in ['production', 'Production', "prod", "Prod"]:
     include("prod.py", scope = globals())
 else:
     include("dev.py", scope = globals())
