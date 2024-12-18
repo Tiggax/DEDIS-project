@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "alpine"
+name = "api"
 version = "0.1.0"
 description = "DEDIS project for alpinistic club"
 authors = ["Tilen Gimpelj <89201122@upr.si>"]
@@ -7,11 +7,13 @@ readme = "README.md"
 
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 django = "5.1.3"
 python-dotenv = "^1.0.1"
 markdown = "^3.6"
 django-bootstrap5 = "^24.3"
+django-split-settings = "^1.3.2"
+mysql-connector-python = "^9.1.0"
 
 [tool.poetry.dev-dependencies]
 django-admin = "^2.0.2"
@@ -24,3 +26,5 @@ build-backend = "poetry.core.masonry.api"
 dev = "scripts:dev"
 migrate = "scripts:migrate"
 htmx_setup = "scripts:setup_HTMX"
+setup_prod = "scripts:setup_prod"
+prod = "scripts:prod"

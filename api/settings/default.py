@@ -10,16 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import json
 from pathlib import Path
-from dotenv import dotenv_values
 
+from .__init__ import cfg
 
-cfg = dotenv_values()
+try:
+    PRE_ALLOWED_HOSTS = json.loads(cfg["ALLOWED_HOSTS"])
+except json.JSONDecodeError:
+    
+    raise ValueError("ALLOWED_HOSTS must be a list (['foo', 'bar'])")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -31,9 +35,10 @@ except KeyError as e:
     raise RuntimeError("Could not find a SECRET_KEY") from e
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "DEBUG" in cfg
+# DEBUG = cfg["DEBUG"] # instanced in __init__
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS += PRE_ALLOWED_HOSTS if PRE_ALLOWED_HOSTS and type(PRE_ALLOWED_HOSTS) is list else []
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = "/"
@@ -48,7 +53,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api.apps.ApiConfig',
     'pages.apps.pagesConfig',
     "django_bootstrap5",
 ]
@@ -63,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'alpine.urls'
+ROOT_URLCONF = 'api.urls'
 
 
 TEMPLATES = [
@@ -82,18 +86,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'alpine.wsgi.application'
+WSGI_APPLICATION = 'api.wsgi.app'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -146,4 +140,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # BOOTSTRAP5
 BOOTSTRAP5 = {
     "javascript_in_head": True,
+}
+
+
+LOGGING = {
+    "version": 1,  # the dictConfig format version
+    "disable_existing_loggers": False,  # retain the default loggers
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "general.log",
+        },
+    },
 }
