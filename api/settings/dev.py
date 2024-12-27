@@ -3,6 +3,8 @@
 
 from .default import *
 
+DEBUG = True
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
