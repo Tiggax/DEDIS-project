@@ -2,14 +2,14 @@
 {% load static %}
 {% block content %}
 
-<div class="row bg-dark text-light p-5 mt-5">
+<div class="row bg-body-tertiary p-5 mt-5">
 {% comment %} <h1 class="text-center my-3 pb-3">OBALNI ALPINISTIČNI KLUB</h1> {% endcomment %}
 <img class="mx-auto mb-5" style="max-width:60%;" src="{% static 'images/textlogo.png' %}">
 <div class='row'>
 
     <div class="col">
     <strong>Kontakt:</strong><br>
-    <a class="text-white" href="mailto:info@obalniak.si">info@obalniak.si</a><br>
+    <strong><a class="link-success" href="mailto:info@obalniak.si">info@obalniak.si</a></strong><br>
     Obalni alpinistični klub<br>
     Zg. Škofije 14<br>
     6281 Škofije
@@ -46,6 +46,7 @@
 
 
 </div>
+
 {% block footer %}
 {% endblock footer %}
 
