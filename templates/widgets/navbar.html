@@ -1,26 +1,32 @@
 {% load static %}
 <header>
     {# inspired by https://getbootstrap.com/docs/4.0/components/navbar/ #}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+     {% comment %} fixed-top {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
         <div class="container">
         
-          <a class="navbar-brand" href="#">Obalni alipnistični klub</a>
+          <a class="navbar-brand" href="#"><img class="mx-3" style="max-width:10%;" src="{% static 'images/logo.png' %}">Obalni alipnistični klub</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Domov</a>
+                {% url 'home' as link %}
+                <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Domov</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">O nas</a>
+                {% url 'reports' as link %}
+                <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Poročila</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Novice</a>
+                {% url 'news' as link %}
+                <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Novice</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Poročila</a>
+                {% url 'about_us' as link %}
+                <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">O nas</a> 
               </li>
           </div>
           <div class="d-flex" role="button">
@@ -28,10 +34,10 @@
             <div class="p-1"></div>
             <a class="btn btn-success" href="{% url 'admin:login' %}">Sign up</a>
           </div>
-
         </div>
       </nav>
 </header>
+
 
               {% comment %} <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
