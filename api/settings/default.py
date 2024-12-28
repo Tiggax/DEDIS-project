@@ -12,14 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 import json
 from pathlib import Path
-from django.contrib.auth.hashers import Argon2PasswordHasher
 
-class OptimalArgon2PasswordHasher(Argon2PasswordHasher):
-    salt_length = 16
-    tag_length = 32
-    time_cost = 1
-    parallelism =1
-    memory_cost = 47104
 
 
 from .__init__ import cfg
@@ -163,11 +156,3 @@ LOGGING = {
     },
 }
 
-PASSWORD_HASHERS = [
-    "api.settings.default.OptimalArgon2PasswordHasher",
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
-    "django.contrib.auth.hashers.ScryptPasswordHasher",
-]
