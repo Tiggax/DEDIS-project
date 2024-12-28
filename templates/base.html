@@ -2,11 +2,11 @@
 {% load django_bootstrap5 %}
 
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{{title}}</title>
+        <title>{% block title %}Obalni alipnistični klub{% endblock title %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% bootstrap_css %}
@@ -16,10 +16,17 @@
         {% block extra_head %}
         {% endblock extra_head %}
     </head>
-    <body>
+    <body class="d-flex flex-column h-100">
+        {% block header %}
+        {% include "widgets/navbar.html" %}
+        {% endblock header %}
+        <main class="container">
         {% block content %}
-        add some content
+        default content
         {% endblock content %}
-        
+        </main>
+        {% block footer %}
+        {% include "widgets/footer.html" %}
+        {% endblock footer %}
     </body>
 </html>
