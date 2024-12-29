@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 
-<div class="row bg-body-tertiary h-100">
-    <div class="col-8 d-flex flex-column">
+<div class="row border h-100 rounded">
+    <div class="col-8 d-flex flex-column shadow">
     <h1 class="text-center my-3">DOBRODOŠLI</h1>
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -13,10 +13,10 @@
     and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     </div>
 
-    <div class="col bg-body-secondary d-flex flex-column">
+    <div class="col border-start d-flex flex-column">
     <h3 class="text-center my-3">KORISTNE POVEZAVE</h3>
 
-    <button class="my-2 btn btn-secondary" data-bs-toggle="collapse" href="#splošne" aria-expanded="false" aria-controls="splošne">Splošne</button>
+    <button class="my-2 btn btn-primary" data-bs-toggle="collapse" href="#splošne" aria-expanded="false" aria-controls="splošne">Splošne</button>
     <div class="list-group collapse" id="splošne">
         <a class="list-group-item list-group-item-action" href="http://alpirocnik.rasica.org/index.php/glavna_stran">Alpiročnik</a>
         <a class="list-group-item list-group-item-action" href="http://www.gore-ljudje.net/">Gore in ljudje</a>
@@ -30,7 +30,7 @@
         <a class="list-group-item list-group-item-action" href="http://www.slo-alp.com/">Slo-Alp</a>
     </div>
 
-    <button class="my-2 btn btn-secondary" data-bs-toggle="collapse" href="#vremenske" aria-expanded="false" aria-controls="vremenske">Vremenske, lavinske in ledne razmere</button>
+    <button class="my-2 btn btn-primary" data-bs-toggle="collapse" href="#vremenske" aria-expanded="false" aria-controls="vremenske">Vremenske, lavinske in ledne razmere</button>
     {% comment %} <strong class="my-2">Vremenske, lavinske in ledne razmere</strong> {% endcomment %}
     <div class="list-group collapse" id="vremenske">
         <a class="list-group-item list-group-item-action" href="http://www.arso.gov.si/vreme/napovedi%20in%20podatki/">ARSO</a>
@@ -42,7 +42,7 @@
 
 
     {% comment %} <strong class="my-2">Trgovine</strong> {% endcomment %}
-    <button class="my-2 btn btn-secondary" data-bs-toggle="collapse" href="#trgovine" aria-expanded="false" aria-controls="trgovine">Trgovine</button>
+    <button class="my-2 btn btn-primary" data-bs-toggle="collapse" href="#trgovine" aria-expanded="false" aria-controls="trgovine">Trgovine</button>
     <div class="list-group collapse" id="trgovine">
     <a class="list-group-item list-group-item-action" href="http://www.iglusport.si/" target="_blank" rel="noopener">Iglu šport</a>
     <a class="list-group-item list-group-item-action" href="http://www.promontana.si/" target="_blank" rel="noopener">Promontana</a>
