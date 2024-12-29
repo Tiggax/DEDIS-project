@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pages.apps.pagesConfig',
+    'api.apps.apiConfig',
     "django_bootstrap5",
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +90,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.app'
 
-
+AUTH_USER_MODEL = "api.ClimbUser"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

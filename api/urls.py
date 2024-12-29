@@ -28,7 +28,8 @@ accounts = [
 ]
 
 apis = [
-    path('', views.index)
+    path('', views.index),
+    path('summernote/', include('django_summernote.urls')),
 ]
 
 
@@ -45,7 +46,7 @@ if settings.DEBUG:
         settings.STATIC_URL,
         document_root = settings.STATIC_ROOT
     )
-    urlpatterns += static(
+urlpatterns += static(
         settings.MEDIA_URL,
         document_root = settings.MEDIA_ROOT
     )

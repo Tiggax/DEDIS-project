@@ -4,4 +4,7 @@ db.sqlite3
 static/admin
 .venv
 general.log
+migrations
+media
 static/htmx.min.js
+
