@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+from .models import NewsPost
+
 # Create your views here.
 
 def index(req):
@@ -16,6 +18,7 @@ def about_us(req):
 def news(req):
     ctx = {}
     ctx["content"] = "add_news_here"
+    ctx["posts"] =  NewsPost.objects.order_by("created")
     return render(req, "pages/news.html", ctx)
 
 def reports(req):
@@ -28,3 +31,4 @@ def logged_in_user_page(req):
     ctx = {}
     ctx["content"] = "user logged in"
     return render(req, "pages/example.html", ctx)
+
