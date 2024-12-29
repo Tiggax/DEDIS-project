@@ -3,25 +3,26 @@ from django.db import models
 from django_summernote.fields import SummernoteTextField
 
 class ClimbUser(AbstractUser):
-    pass
+    PERMISSIONS = (
+        ("U","Unapproved"),
+        ("A", "Approved"),
+        ("M", "Moderator")
+    )
+
+    RANKS = (
+        ("A", "Apprentice"),
+        ("J", "Junior"),
+        ("S", "Senior"),
+        ("P", "Alpinist"),
+        ("I", "Alpinist Instructor")
+    )
+
+    permission = models.CharField(max_length=1, choices=PERMISSIONS, default="U")
+    rank = models.CharField(max_length=1, choices=RANKS, default="A")
+    profile_pic = models.FileField(null=True, blank=True)
+
     def __str__(self):
         return self.username
-
-class Invite(models.Model):
-    created = models.DateTimeField(auto_now_add = True)
-    accepted = models.DateTimeField()
-    invite_creator = models.ForeignKey(
-        ClimbUser, 
-        on_delete = models.CASCADE,
-        related_name = "invite_creator"
-    )
-    invite_acceptor = models.ForeignKey(
-        ClimbUser, 
-        on_delete = models.CASCADE,
-        related_name = "invite_acceptor"
-    )
-
-
 
 
     
