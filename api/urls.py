@@ -30,6 +30,7 @@ accounts = [
 apis = [
     path('', views.index),
     path('summernote/', include('django_summernote.urls')),
+    path('render/<path:template>', views.render_template, name="render"),
 ]
 
 
