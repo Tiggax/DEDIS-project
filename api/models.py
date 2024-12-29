@@ -8,17 +8,17 @@ class ClimbUser(AbstractUser):
         return self.username
 
 class Invite(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add = True)
     accepted = models.DateTimeField()
     invite_creator = models.ForeignKey(
         ClimbUser, 
-        on_delete=models.CASCADE,
-        related_name="invite_creator"
+        on_delete = models.CASCADE,
+        related_name = "invite_creator"
     )
     invite_acceptor = models.ForeignKey(
         ClimbUser, 
-        on_delete=models.CASCADE,
-        related_name="invite_acceptor"
+        on_delete = models.CASCADE,
+        related_name = "invite_acceptor"
     )
 
 
