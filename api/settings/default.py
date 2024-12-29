@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pages.apps.pagesConfig',
     "django_bootstrap5",
+    'django_summernote',
 ]
 
 MIDDLEWARE = [

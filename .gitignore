@@ -4,3 +4,5 @@ db.sqlite3
 static
 .venv
 general.log
+migrations
+media

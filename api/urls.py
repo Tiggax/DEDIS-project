@@ -28,7 +28,8 @@ accounts = [
 ]
 
 apis = [
-    path('', views.index)
+    path('', views.index),
+    path('summernote/', include('django_summernote.urls')),
 ]
 
 
