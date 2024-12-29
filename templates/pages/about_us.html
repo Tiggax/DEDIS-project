@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row bg-body-tertiary p-5 mt-5">
+{% comment %} <h1 class="text-center my-3 pb-3">OBALNI ALPINISTIČNI KLUB</h1> {% endcomment %}
+<img class="mx-auto mb-5" style="max-width:60%;" src="{% static 'images/textlogo.png' %}">
+<div class='row'>
+
+    <div class="col">
+    <strong>Kontakt:</strong><br>
+    <strong><a class="link-success" href="mailto:info@obalniak.si">info@obalniak.si</a></strong><br>
+    Obalni alpinistični klub<br>
+    Zg. Škofije 14<br>
+    6281 Škofije
+    </div>
+
+    <div class="col">
+    <strong>Upravni odbor:</strong><br>
+    Gregor Bratož – načelnik<br>
+    Sonja Živec – namestnica načelnika<br>
+    Fulvij Živec – gospodar<br>
+    Peter Kokotec<br>
+    Simon Glavina<br>
+    Marjan Olenik<br>
+    </div>
+
+    <div class="col">
+    <strong>Nadzorni odbor:</strong> <br>
+    Jaka Petruša<br>
+    Andrej Knez<br>
+    Urban Hrvatin<br>
+    </div>
+
+    <div class="col">
+    <strong>Disciplinska komisija:</strong><br>
+    Borut Antončič<br>
+    Klavdij Bembič<br>
+    Andreja Kuzmič<br>
+    </div>
+    <div class="col">
+    <strong>Vodja zbora alpinistov:</strong><br>
+    Mojca Cencič<br>
+    </div>
+
+
+
+</div>
+
+{% block footer %}
+{% endblock footer %}
+
+{% endblock content %}
