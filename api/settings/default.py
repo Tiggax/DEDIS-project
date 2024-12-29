@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'api.apps.apiConfig',
     "django_bootstrap5",
     'django_summernote',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
