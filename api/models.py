@@ -8,7 +8,7 @@ class ClimbUser(AbstractUser):
         return self.username
 
 class Invite(models.Model):
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
     accepted = models.DateTimeField()
     invite_creator = models.ForeignKey(
         ClimbUser, 
