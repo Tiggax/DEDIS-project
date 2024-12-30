@@ -37,9 +37,9 @@ apis = [
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(apis)),
-    path('accounts/',include(accounts)),
-    path('', include("pages.urls"))
+    path('api/', include(apis, namespace="api")),
+    path('accounts/',include(accounts, namespace="accounts")),
+    path('', include("pages.urls", namespace="pages"))
 ]
 
 if settings.DEBUG:
