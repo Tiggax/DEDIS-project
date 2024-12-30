@@ -29,7 +29,6 @@ accounts = ([
 
 apis = ([
     path('', views.index),
-    path('summernote/', include('django_summernote.urls')),
     path('render/<str:object>/<int:id>/<path:template>', views.render_template, name="render"),
 ], "api")
 
@@ -38,6 +37,7 @@ apis = ([
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(apis)),
+    path('api/summernote/', include('django_summernote.urls')), # manual move out of "api:..."
     path('accounts/',include(accounts)),
     path('', include("pages.urls"))
 ]
