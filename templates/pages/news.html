@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="col">
+<div class="list-group row align-items-center">
 {% for post in posts %}
 {% comment %} <div hx-post="{% url 'render' 'widgets/news_post.html' post %}" hx-trigger="load">
   <img alt="Result loading..." class="htmx-indicator" width="150" src="/img/bars.svg"/>
