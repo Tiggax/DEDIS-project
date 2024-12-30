@@ -30,16 +30,16 @@ accounts = [
 apis = [
     path('', views.index),
     path('summernote/', include('django_summernote.urls')),
-    path('render/<path:template>', views.render_template, name="render"),
+    path('render/<str:object>/<int:id>/<path:template>', views.render_template, name="render"),
 ]
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(apis)),
-    path('accounts/',include(accounts)),
-    path('', include("pages.urls"))
+    path('api/', include(apis, namespace="api")),
+    path('accounts/',include(accounts, namespace="accounts")),
+    path('', include("pages.urls", namespace="pages"))
 ]
 
 if settings.DEBUG:
