@@ -21,7 +21,7 @@ class Route(models.Model):
 class Report(models.Model):
     title = models.CharField(max_length = 100)
     created = models.DateTimeField(auto_now_add = True)
-    content = SummernoteTextField()
+    content = models.TextField()
     report_creator = models.ForeignKey(
         "api.ClimbUser", 
         on_delete = models.CASCADE,
@@ -40,7 +40,7 @@ class GalleryImage(models.Model):
     gallery = models.ForeignKey(Report, on_delete = models.CASCADE)
 
 class Comment(models.Model):
-    content = SummernoteTextField()
+    content = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
     comment_creator = models.ForeignKey(
         "api.ClimbUser", 
@@ -55,7 +55,7 @@ class PostTag(models.Model):
 class NewsPost(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     title = models.TextField()
-    content = SummernoteTextField()
+    content = models.TextField()
     post_author = models.ForeignKey(
         "api.ClimbUser",
         on_delete = models.CASCADE,
