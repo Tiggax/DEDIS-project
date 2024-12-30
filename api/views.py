@@ -1,7 +1,10 @@
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
+
+import json
+from pages.models import *
 
 
 
@@ -17,3 +20,33 @@ class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
+
+
+def render_template(req, object, id, template):
+    ctx = {}
+    
+    if req.method == "POST":
+        try:
+
+            ctx["data"] = json.loads(req.body)
+        
+        except Exception as e:
+            pass
+            # ctx["data"] = json.dumps(e)
+        match object:
+            case "NewsPost":
+                ctx["data"] = get_object_or_404(NewsPost, pk = id)
+            case "Comment":
+                ctx["data"] = get_object_or_404(Comment, pk = id)
+            case "Report":
+                ctx["data"] = get_object_or_404(Report, pk = id)
+            case _:
+                pass
+        
+    else:
+        ctx["data"] = json.dumps("Only POST allowed")
+        print(f"NOT POST REQUEST")
+        return HttpResponse(ctx["data"], 'application/json', charset='utf-8')
+    print("request: {template} with {}", ctx["data"])
+    return render(req, template, ctx)
+

@@ -22,20 +22,22 @@ import pages.urls
 
 from . import views
 
-accounts = [
+accounts = ([
     path('signup/', views.SignUpView.as_view(), name = "signup"),
     path("", include("django.contrib.auth.urls")),
-]
+], "accounts")
 
-apis = [
-    path('', views.index)
-]
+apis = ([
+    path('', views.index),
+    path('render/<str:object>/<int:id>/<path:template>', views.render_template, name="render"),
+], "api")
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(apis)),
+    path('api/summernote/', include('django_summernote.urls')), # manual move out of "api:..."
     path('accounts/',include(accounts)),
     path('', include("pages.urls"))
 ]
@@ -45,7 +47,7 @@ if settings.DEBUG:
         settings.STATIC_URL,
         document_root = settings.STATIC_ROOT
     )
-    urlpatterns += static(
+urlpatterns += static(
         settings.MEDIA_URL,
         document_root = settings.MEDIA_ROOT
     )

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row border h-100 rounded">
+    <div class="col-8 d-flex flex-column shadow">
+    <h1 class="text-center my-3">DOBRODOŠLI</h1>
+    <p class="mx-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+    It has survived not only five centuries, but also the leap into electronic typesetting, 
+    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </p>
+    </div>
+
+    <div class="col border-start d-flex flex-column">
+    <h3 class="text-center my-3 mx-3">KORISTNE POVEZAVE</h3>
+
+    <button class="my-1 mx-3 btn btn-primary" data-bs-toggle="collapse" href="#splošne" aria-expanded="false" aria-controls="splošne">Splošne</button>
+    <div class="list-group collapse mx-3" id="splošne">
+        <a class="list-group-item list-group-item-action" href="http://alpirocnik.rasica.org/index.php/glavna_stran">Alpiročnik</a>
+        <a class="list-group-item list-group-item-action" href="http://www.gore-ljudje.net/">Gore in ljudje</a>
+        <a class="list-group-item list-group-item-action" href="http://ka.pzs.si/">Komisija za alpinizem</a>
+        <a class="list-group-item list-group-item-action" href="http://www.pzs.si/">PZS</a>
+        <a class="list-group-item list-group-item-action" href="http://www.plezanje.net/climbing/index.asp">plezanje.net</a>
+        <a class="list-group-item list-group-item-action" href="http://www.montagna.org">montagna.org</a>
+        <a class="list-group-item list-group-item-action" href="http://www.planetmountain.com">Planet mountain</a>
+        <a class="list-group-item list-group-item-action" href="http://www.primorskestene.com">Primorske stene</a>
+        <a class="list-group-item list-group-item-action" href="http://www.sneznik.net">Snežnik</a>
+        <a class="list-group-item list-group-item-action" href="http://www.slo-alp.com/">Slo-Alp</a>
+    </div>
+
+    <button class="my-1 mx-3 btn btn-primary" data-bs-toggle="collapse" href="#vremenske" aria-expanded="false" aria-controls="vremenske">Vremenske, lavinske in ledne razmere</button>
+    {% comment %} <strong class="my-2">Vremenske, lavinske in ledne razmere</strong> {% endcomment %}
+    <div class="list-group collapse mx-3" id="vremenske">
+        <a class="list-group-item list-group-item-action" href="http://www.arso.gov.si/vreme/napovedi%20in%20podatki/">ARSO</a>
+        <a class="list-group-item list-group-item-action" href="http://meteo.hr/index.php">Meteo Hrvaška</a>
+        <a class="list-group-item list-group-item-action" href="http://www.ilmeteo.it/meteo-europa/slovenia">ilmeteo.it</a>
+        <a class="list-group-item list-group-item-action" href="http://www.regione.fvg.it/asp/newvalanghe/">FVG lavinska napoved</a>
+        <a class="list-group-item list-group-item-action" href="http://www.plazovi.info/plazovi/snezni_plazovi.html">Plazovi info</a>
+    </div>
+
+
+    {% comment %} <strong class="my-2">Trgovine</strong> {% endcomment %}
+    <button class="my-1 mx-3 btn btn-primary" data-bs-toggle="collapse" href="#trgovine" aria-expanded="false" aria-controls="trgovine">Trgovine</button>
+    <div class="list-group collapse mx-3" id="trgovine">
+    <a class="list-group-item list-group-item-action" href="http://www.iglusport.si/" target="_blank" rel="noopener">Iglu šport</a>
+    <a class="list-group-item list-group-item-action" href="http://www.promontana.si/" target="_blank" rel="noopener">Promontana</a>
+    <a class="list-group-item list-group-item-action" href="http://www.kibuba.com/index.php" target="_blank" rel="noopener">Kibuba</a>
+    <a class="list-group-item list-group-item-action" href="http://www.climbersonly.net/" target="_blank" rel="noopener">ClimbersOnly.net</a>
+    <a class="list-group-item list-group-item-action" href="http://www.sportler.com/sportlershop/ingresso;jsessionid=xdsofuxpyjgcpypkhmkoemex">Sportler</a>
+    </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% comment %} https://getbootstrap.com/docs/5.3/examples/ {% endcomment %}
