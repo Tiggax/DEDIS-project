@@ -13,19 +13,19 @@
           
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                {% url 'home' as link %}
+                {% url 'pages:home' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Domov</a>
               </li>
               <li class="nav-item">
-                {% url 'reports' as link %}
+                {% url 'pages:reports' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Poročila</a>
               </li>
               <li class="nav-item">
-                {% url 'news' as link %}
+                {% url 'pages:news' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Novice</a>
               </li>
               <li class="nav-item">
-                {% url 'about_us' as link %}
+                {% url 'pages:about_us' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">O nas</a> 
               </li>
           </div>

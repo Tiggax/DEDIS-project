@@ -22,24 +22,24 @@ import pages.urls
 
 from . import views
 
-accounts = [
+accounts = ([
     path('signup/', views.SignUpView.as_view(), name = "signup"),
     path("", include("django.contrib.auth.urls")),
-]
+], "accounts")
 
-apis = [
+apis = ([
     path('', views.index),
     path('summernote/', include('django_summernote.urls')),
     path('render/<str:object>/<int:id>/<path:template>', views.render_template, name="render"),
-]
+], "api")
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(apis, namespace="api")),
-    path('accounts/',include(accounts, namespace="accounts")),
-    path('', include("pages.urls", namespace="pages"))
+    path('api/', include(apis)),
+    path('accounts/',include(accounts)),
+    path('', include("pages.urls"))
 ]
 
 if settings.DEBUG:
