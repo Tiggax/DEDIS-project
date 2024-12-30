@@ -9,6 +9,9 @@ from django_summernote.fields import SummernoteTextField
 class Mountain(models.Model):
     name = models.CharField(max_length = 50)
 
+    def __str__(self):
+        return f"{self.name}"
+
 class Route(models.Model):
     mountain = models.ForeignKey(
         Mountain, 
@@ -17,6 +20,8 @@ class Route(models.Model):
         null = True
     )
     name = models.TextField()
+    def __str__(self):
+        return f"{self.mountain} - {self.name}"
 
 class Report(models.Model):
     title = models.CharField(max_length = 100)
@@ -39,6 +44,9 @@ class GalleryImage(models.Model):
     created = models.DateField(auto_now_add = True)
     gallery = models.ForeignKey(Report, on_delete = models.CASCADE)
 
+    def __str__(self):
+        return f"{self.image.name}"
+
 class Comment(models.Model):
     content = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
@@ -49,8 +57,13 @@ class Comment(models.Model):
     )
     report_id = models.ForeignKey(Report, on_delete = models.CASCADE)
 
+    def __str__(self):
+        return f"{self.comment_creator.username}: {self.created}"
+
 class PostTag(models.Model):
     tag = models.CharField( max_length = 20)
+    def __str__(self):
+        return f"#{self.tag}"
 
 class NewsPost(models.Model):
     created = models.DateTimeField(auto_now_add = True)
@@ -62,3 +75,6 @@ class NewsPost(models.Model):
         related_name="post_author"
     )
     tags = models.ManyToManyField(PostTag)
+    
+    def __str__(self):
+        return f"{self.title}"
