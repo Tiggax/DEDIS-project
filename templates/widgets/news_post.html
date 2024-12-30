@@ -1,12 +1,13 @@
 <div class="card shadow p-4 m-5 row">
     <h2>{{ data.title }}</h2>
-    <p class="card-text">{{data.content|safe}}</p>
+    <p class="card-text">{{data.content|safe|truncatechars_html:500}}</p>
     <div class="row">
     {% comment %} <div class="btn-group">
         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
         <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
     </div> {% endcomment %}
-    <p class="text-body-secondary col">{{data.post_author}}: {{data.created}}</p>
-    <small class="text-body-secondary col"></small>
+    <p class="text-body-secondary col">{{data.post_author}}</p>
+    <p class="text-body-secondary col text-end">{{data.created}}</p>
+    {% comment %} <small class="text-body-secondary col"></small> {% endcomment %}
     </div>
 </div>
