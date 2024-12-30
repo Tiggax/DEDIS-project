@@ -2,6 +2,7 @@ from django.db import models
 
 from django_summernote.fields import SummernoteTextField
 
+from api.models import ClimbUser
 
 # Create your models here.
 
@@ -28,7 +29,7 @@ class Report(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     content = models.TextField()
     report_creator = models.ForeignKey(
-        "api.ClimbUser", 
+        ClimbUser, 
         on_delete = models.CASCADE,
         related_name="report_creator"
     )
@@ -51,7 +52,7 @@ class Comment(models.Model):
     content = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
     comment_creator = models.ForeignKey(
-        "api.ClimbUser", 
+        ClimbUser, 
         on_delete = models.CASCADE,
         related_name="comment_creator"
     )
@@ -70,7 +71,7 @@ class NewsPost(models.Model):
     title = models.TextField()
     content = models.TextField()
     post_author = models.ForeignKey(
-        "api.ClimbUser",
+        ClimbUser,
         on_delete = models.CASCADE,
         related_name="post_author"
     )
