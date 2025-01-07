@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from pages.forms import CustomUserCreationForm
+
 from .models import NewsPost
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
@@ -33,15 +33,3 @@ def logged_in_user_page(req):
     ctx = {}
     ctx["content"] = "user logged in"
     return render(req, "pages/example.html", ctx)
-
-def register(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-    else:
-        form = CustomUserCreationForm()
-    
-    return render(request, 'registration/register.html', {'form': form})
