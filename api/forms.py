@@ -1,6 +1,6 @@
 from api import settings
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 
 from api.models import ClimbUser
 
@@ -15,3 +15,7 @@ class ClimbUserCreationForm(UserCreationForm):
         model = ClimbUser
         fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email')
             
+
+
+class ClimbUserUpdateForm(UserChangeForm):
+    pass
