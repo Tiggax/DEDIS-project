@@ -117,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'sl-si'
 
-TIME_ZONE = 'SI'
+TIME_ZONE = 'Europe/Ljubljana'
 
 USE_I18N = True
 
