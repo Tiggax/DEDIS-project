@@ -29,11 +29,20 @@
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">O nas</a> 
               </li>
           </div>
+          {% if user.is_authenticated %}
+          <div class="d-flex" role="button">
+            <a class="btn btn-primary" href="{% url 'accounts:update' %}">My profile</a>
+            <div class="p-1"></div>
+            <a class="btn btn-primary" href="{% url 'accounts:logout' %}">Log out</a>
+          </div>
+          {% else %}
           <div class="d-flex" role="button">
             <a class="btn btn-primary" href="{% url 'accounts:login' %}">Login</a>
             <div class="p-1"></div>
             <a class="btn btn-primary" href="{% url 'accounts:signup' %}">Sign up</a>
           </div>
+          {% endif %}
+
         </div>
       </nav>
 </header>
