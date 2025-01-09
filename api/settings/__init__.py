@@ -15,7 +15,6 @@ cfg = environ
 DEBUG = "DEBUG" in dotenv_values()
 
 include("default.py", scope = globals())
-include("hasher_settings.py", scope = globals())
 
 ENV_TYPE = os.environ.get("ENV_TYPE")
 
