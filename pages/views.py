@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from .models import NewsPost
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login
 
 # Create your views here.
 
@@ -31,4 +33,3 @@ def logged_in_user_page(req):
     ctx = {}
     ctx["content"] = "user logged in"
     return render(req, "pages/example.html", ctx)
-

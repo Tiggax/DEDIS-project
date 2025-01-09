@@ -127,7 +127,7 @@ PASSWORD_HASHERS = [
 
 LANGUAGE_CODE = 'sl-si'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Ljubljana'
 
 USE_I18N = True
 
@@ -146,6 +146,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
+LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

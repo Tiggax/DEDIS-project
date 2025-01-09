@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
         <div class="container">
         
-          <a class="navbar-brand" href="#"><img class="mx-3" style="max-width:10%;" src="{% static 'images/logo.png' %}">Obalni alipnistični klub</a>
+          <a class="navbar-brand" href="{% url 'pages:home' %}"><img class="mx-3" style="max-width:10%;" src="{% static 'images/logo.png' %}">Obalni alpinistični klub</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -29,11 +29,27 @@
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">O nas</a> 
               </li>
           </div>
-          <div class="d-flex" role="button">
-            <a class="btn btn-primary" href="{% url 'admin:login' %}">Login</a>
-            <div class="p-1"></div>
-            <a class="btn btn-primary" href="{% url 'admin:login' %}">Sign up</a>
+          {% if user.is_authenticated %}
+          <div class="d-flex">
+            Hello: 
+            {{user.username}}
           </div>
+          <div class="d-flex" role="button">
+            <a class="btn btn-primary" href="{% url 'accounts:update' %}">My profile</a>
+            <div class="p-1"></div>
+            <form action="{% url 'accounts:logout' %}" method="post" >
+              {% csrf_token %}
+              <button class="btn btn-warning" type="submit">Logout</button>
+          </form>
+          </div>
+          {% else %}
+          <div class="d-flex" role="button">
+            <a class="btn btn-primary" href="{% url 'accounts:login' %}">Login</a>
+            <div class="p-1"></div>
+            <a class="btn btn-primary" href="{% url 'accounts:signup' %}">Sign up</a>
+          </div>
+          {% endif %}
+
         </div>
       </nav>
 </header>
