@@ -20,6 +20,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 import pages.urls
 
+
 from . import views
 
 accounts = ([
