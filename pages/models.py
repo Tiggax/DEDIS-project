@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 from django_summernote.fields import SummernoteTextField
@@ -25,6 +27,7 @@ class Route(models.Model):
         return f"{self.mountain} - {self.name}"
 
 class Report(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length = 100)
     created = models.DateTimeField(auto_now_add = True)
     content = models.TextField()
@@ -67,6 +70,7 @@ class PostTag(models.Model):
         return f"#{self.tag}"
 
 class NewsPost(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created = models.DateTimeField(auto_now_add = True)
     title = models.TextField()
     content = models.TextField()
