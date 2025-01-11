@@ -5,4 +5,11 @@ class NewsPostFilter(django_filters.FilterSet):
 
     class Meta:
         model = NewsPost
-        fields = ['created', 'title', 'content', 'author', 'tags']
+        fields = ['created', 'title', 'content', 'tags']
+
+
+class ReportFilter(django_filters.FilterSet):
+    
+    class Meta:
+        model = Report
+        fields = ['title', 'created', 'content', 'report_creator', 'route']
