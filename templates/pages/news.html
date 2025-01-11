@@ -6,7 +6,7 @@
 {% comment %} <div hx-post="{% url 'render' 'widgets/news_post.html' post %}" hx-trigger="load">
   <img alt="Result loading..." class="htmx-indicator" width="150" src="/img/bars.svg"/>
 </div> {% endcomment %}
-{% include "widgets/news_post.html" with data=post %}
+{% include "widgets/news/card.html" with data=post %}
 {% endfor %}
 
 </div>

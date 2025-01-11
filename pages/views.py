@@ -38,3 +38,15 @@ def report(req, id):
     ctx["data"] = get_object_or_404(Report, id=id)
     return render(req, "pages/report.html", ctx)
 
+# News
+
+def news(req):
+    ctx = {}
+    ctx["content"] = "add_news_here"
+    ctx["posts"] =  NewsPost.objects.order_by("created")
+    return render(req, "pages/news.html", ctx)
+
+def get_news(req, id):
+    ctx = {}
+    ctx["data"] = get_object_or_404(NewsPost, id=id)
+    return render(req, "pages/get_news.html", ctx)

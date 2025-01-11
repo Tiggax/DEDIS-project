@@ -1,4 +1,4 @@
-<a href="#" class="card shadow w-75 p-4 m-5 col list-group-item list-group-item-action">
+<a href="{% url 'pages:get_news' data.id %}" class="card shadow w-75 p-4 m-5 col list-group-item list-group-item-action">
     <h2>{{ data.title }}</h2>
     <p class="card-text">{{data.content|safe|truncatechars_html:500}}</p>
     <div class="row">
