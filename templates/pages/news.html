@@ -2,12 +2,12 @@
 {% load static %}
 {% block content %}
 <div class="list-group row align-items-center">
-{% for post in posts %}
-{% comment %} <div hx-post="{% url 'render' 'widgets/news_post.html' post %}" hx-trigger="load">
-  <img alt="Result loading..." class="htmx-indicator" width="150" src="/img/bars.svg"/>
-</div> {% endcomment %}
-{% include "widgets/news/card.html" with data=post %}
-{% endfor %}
-
+  {% for post in posts %}
+  {% comment %} <div hx-post="{% url 'render' 'widgets/news_post.html' post %}" hx-trigger="load">
+    <img alt="Result loading..." class="htmx-indicator" width="150" src="/img/bars.svg"/>
+  </div> {% endcomment %}
+  {% include "widgets/news/card.html" with data=post %}
+  {% endfor %}
+  {% include "widgets/paginator.html" with paginator=posts %}
 </div>
 {% endblock content%}

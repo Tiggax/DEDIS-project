@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import NewsPost, Report
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -31,6 +32,10 @@ def logged_in_user_page(req):
 def reports(req):
     ctx = {}
     reports = Report.objects.order_by("created")
+    page_length = req.GET.get("page_count")
+    paginator = Paginator(reports, page_length if page_length else 25)
+    page_number = req.GET.get("page")
+    ctx["reports"] = paginator.get_page(page_number)
     return render(req, "pages/reports.html", ctx)
 
 def report(req, id):
@@ -42,8 +47,11 @@ def report(req, id):
 
 def news(req):
     ctx = {}
-    ctx["content"] = "add_news_here"
-    ctx["posts"] =  NewsPost.objects.order_by("created")
+    news = NewsPost.objects.order_by("created")
+    page_length = req.GET.get("page_count")
+    paginator = Paginator(news, page_length if page_length else 25)
+    page_number = req.GET.get("page")
+    ctx["posts"] =  paginator.get_page(page_number)
     return render(req, "pages/news.html", ctx)
 
 def get_news(req, id):

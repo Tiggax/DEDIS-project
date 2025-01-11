@@ -3,7 +3,8 @@
 {% block content %}
 <div class="list-group row align-items-center">
     {% for report in reports %}
-{% include "widgets/report/card.html" with data=report %}
-{% endfor %}
+    {% include "widgets/report/card.html" with data=report %}
+    {% endfor %}
+    {% include "widgets/paginator.html" with paginator=reports %}
 </div>
 {% endblock content%}
