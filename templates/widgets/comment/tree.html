@@ -1,0 +1,10 @@
+<div>
+    {% for comment in data %}
+    
+        {% include "widgets/comment/post.html" with data=comment %}
+
+    {% endfor %}
+    <div>
+        {% include "widgets/comment/new_comment.html" %}
+    </div>
+</div>
