@@ -1,3 +1,11 @@
-specific report page for
+{% extends "base.html" %}
 
-{{ data.id }}
+{% block content %}
+    {% include "widgets/report/post.html" with data=report%}
+
+    {% include "widgets/gallery/tree.html" with data=gallery %}
+
+    {% include "widgets/comment/tree.html" with data=comments %}
+
+{% endblock content %}  
+

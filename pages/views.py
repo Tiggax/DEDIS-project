@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from .models import NewsPost, Report
+from .models import NewsPost, Report, Comment
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.core.paginator import Paginator
@@ -40,7 +40,10 @@ def reports(req):
 
 def report(req, id):
     ctx = {}
-    ctx["data"] = get_object_or_404(Report, id=id)
+    report = get_object_or_404(Report, id=id)
+    ctx["report"] = report
+    ctx["comments"] = report.comment_set.all()
+    ctx["gallery"] = report.galleryimage_set.all()
     return render(req, "pages/report.html", ctx)
 
 # News
