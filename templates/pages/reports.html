@@ -2,11 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="list-group row align-items-center">
-    <form method="get">
-        {{ reports.form.as_p }}
-        <input type="submit"/>
-    </form>
-{% for report in reports.qs %}
+    {% for report in reports %}
 {% include "widgets/report/card.html" with data=report %}
 {% endfor %}
 </div>

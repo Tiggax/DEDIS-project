@@ -5,7 +5,6 @@ from .models import NewsPost, Report
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 
-from .filters import ReportFilter
 
 # Create your views here.
 
@@ -31,12 +30,11 @@ def logged_in_user_page(req):
 
 def reports(req):
     ctx = {}
-    ctx["reports"] = ReportFilter(req.GET, queryset=Report.objects.order_by("created"))
+    reports = Report.objects.order_by("created")
     return render(req, "pages/reports.html", ctx)
 
 def report(req, id):
     ctx = {}
-    print(id)
     ctx["data"] = get_object_or_404(Report, id=id)
     return render(req, "pages/report.html", ctx)
 
