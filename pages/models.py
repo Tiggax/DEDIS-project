@@ -43,7 +43,7 @@ class Report(models.Model):
 
 class GalleryImage(models.Model):
     def gallery_path(instance, filename):
-        return f"gallery/{instance.created.year}/{instance.created.month}/id_{instance.gallery.id}/{filename}"
+        return f"gallery/{instance.created.year}/{instance.created.month}/{instance.gallery.id}/{filename}"
     image = models.FileField(upload_to = gallery_path)
     created = models.DateField(auto_now_add = True)
     gallery = models.ForeignKey(Report, on_delete = models.CASCADE)
