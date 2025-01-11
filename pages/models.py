@@ -79,7 +79,7 @@ class NewsPost(models.Model):
         on_delete = models.CASCADE,
         related_name="post_author"
     )
-    tags = models.ManyToManyField(PostTag, blank=True, null=True)
+    tags = models.ManyToManyField(PostTag, blank=True)
     
     def __str__(self):
         return f"{self.title}"
