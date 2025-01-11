@@ -1,1 +1,1 @@
-from .generators import news, reports
+from .generators import news, reports, populate_comments, populate_gallery
