@@ -126,7 +126,10 @@ def news(req):
     for key, val in key_values:
         match key:
             case "author":
-                users = ClimbUser.objects.filter(username__icontains = val)
+                query = Q()
+                for field in ["username", "fist_name", "last_name"]:
+                    query |= Q(**{f"{field}__icontains": val})
+                users = ClimbUser.objects.filter(query)
                 news |= all_news.filter( author__in = users ).distinct()
             case _:
                 pass
