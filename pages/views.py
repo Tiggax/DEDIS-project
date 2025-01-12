@@ -56,8 +56,3 @@ def news(req):
     page_number = req.GET.get("page")
     ctx["posts"] =  paginator.get_page(page_number)
     return render(req, "pages/news.html", ctx)
-
-def get_news(req, id):
-    ctx = {}
-    ctx["data"] = get_object_or_404(NewsPost, id=id)
-    return render(req, "pages/get_news.html", ctx)
