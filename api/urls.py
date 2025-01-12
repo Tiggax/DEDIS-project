@@ -32,7 +32,7 @@ accounts = ([
 
 apis = ([
     path('', views.index),
-    path('render/<str:object>/<int:id>/<path:template>', views.render_template, name="render"),
+    path('render/<str:object>/<uuid:id>/<path:template>', views.render_template, name="render"),
 ], "api")
 
 

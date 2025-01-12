@@ -39,28 +39,14 @@ class UpdatePassword(PasswordChangeView):
 
 def render_template(req, object, id, template):
     ctx = {}
-    
-    if req.method == "POST":
-        try:
-
-            ctx["data"] = json.loads(req.body)
-        
-        except Exception as e:
+    match object:
+        case "NewsPost":
+            ctx["data"] = get_object_or_404(NewsPost, pk = id)
+        case "Comment":
+            ctx["data"] = get_object_or_404(Comment, pk = id)
+        case "Report":
+            ctx["data"] = get_object_or_404(Report, pk = id)
+        case _:
             pass
-            # ctx["data"] = json.dumps(e)
-        match object:
-            case "NewsPost":
-                ctx["data"] = get_object_or_404(NewsPost, pk = id)
-            case "Comment":
-                ctx["data"] = get_object_or_404(Comment, pk = id)
-            case "Report":
-                ctx["data"] = get_object_or_404(Report, pk = id)
-            case _:
-                pass
-        
-    else:
-        ctx["data"] = json.dumps("Only POST allowed")
-        print(f"NOT POST REQUEST")
-        return HttpResponse(ctx["data"], 'application/json', charset='utf-8')
     print("request: {template} with {}", ctx["data"])
     return render(req, template, ctx)
