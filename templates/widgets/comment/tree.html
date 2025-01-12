@@ -1,10 +1,9 @@
-<div>
-    {% for comment in data %}
-    
-        {% include "widgets/comment/post.html" with data=comment %}
-
-    {% endfor %}
-    <div>
-        {% include "widgets/comment/new_comment.html" %}
-    </div>
+<div id="comments" class="rounded p-2">
+    {% if data.count > 0 %}
+        {% for comment in data %}
+            {% include "widgets/comment/post.html" with data=comment %}
+        {% endfor %}
+    {% else %}
+        No Comments yet...
+    {% endif %}
 </div>

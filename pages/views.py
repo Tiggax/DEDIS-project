@@ -42,7 +42,7 @@ def report(req, id):
     ctx = {}
     report = get_object_or_404(Report, id=id)
     ctx["report"] = report
-    ctx["comments"] = report.comment_set.all()
+    ctx["comments"] = report.comments.all()
     ctx["gallery"] = report.galleryimage_set.all()
     return render(req, "pages/report.html", ctx)
 

@@ -1,3 +1,6 @@
 <div class="rounded card shadow">
-    {{data.content}}
+    <p>{{data.content|safe}}</p>
+    {{data.created}}
+    {{data.creator}}
+    <p>{{data.id}}</p>
 </div>
