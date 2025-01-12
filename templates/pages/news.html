@@ -1,13 +1,30 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="list-group row align-items-center">
-  {% for post in posts %}
-  {% comment %} <div hx-post="{% url 'render' 'widgets/news_post.html' post %}" hx-trigger="load">
-    <img alt="Result loading..." class="htmx-indicator" width="150" src="/img/bars.svg"/>
-  </div> {% endcomment %}
-  {% include "widgets/news/card.html" with data=post %}
-  {% endfor %}
-  {% include "widgets/paginator.html" with paginator=posts %}
-</div>
-{% endblock content%}
+<div class="row">
+
+  <div class="list-group col align-items-center">
+    <h3>
+      Search News
+      <span class="htmx-indicator spinner-border" role="status">
+          <span class="sr-only"></span>
+       </span>
+    </h3>
+    {% csrf_token %}
+    <input class="form-control" type="search"
+           name="search" placeholder="Begin Typing To Search News..."
+           hx-post="{% url 'api:news' %}"
+           hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+           hx-target="#news--selection"
+           hx-indicator=".htmx-indicator"
+           hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}"}'
+    >
+    <div id="news--selection">
+      {% include "widgets/news/tree.html" with data=posts%}
+    </div>
+  </div>
+  <div id="news--container" class="col">
+    {% include "widgets/news/post.html"  with data=posts|first %}
+  </div>
+  </div>
+{% endblock content %}

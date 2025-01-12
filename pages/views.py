@@ -52,7 +52,7 @@ def news(req):
     ctx = {}
     news = NewsPost.objects.order_by("created")
     page_length = req.GET.get("page_count")
-    paginator = Paginator(news, page_length if page_length else 25)
+    paginator = Paginator(news, page_length if page_length else 10)
     page_number = req.GET.get("page")
     ctx["posts"] =  paginator.get_page(page_number)
     return render(req, "pages/news.html", ctx)

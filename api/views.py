@@ -6,8 +6,11 @@ from api.forms import ClimbUserCreationForm, ClimbUserUpdateForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 import json
+import re
 from pages.models import *
 from pages.forms import CommentForm
 
@@ -85,3 +88,53 @@ def post_comment(req, id):
 
     return render(req, "widgets/comment/new_comment.html", ctx)
 
+# News
+
+def news(req):
+    ctx = {}
+    search_term = req.POST["search"] if req.POST["search"] else ""
+
+    w_a_q_regex = r'"([^"]+)"|(\b\w+\b)'
+    tags_regex = r'#(\w+)'
+    key_val_regex = r'(\w+):(?:"([^"]+)"|(\w+))'
+
+    w_a_q = re.findall(w_a_q_regex, search_term)
+    tags = re.findall(tags_regex, search_term)
+    key_vals = re.findall(key_val_regex, search_term)
+    
+
+    terms = [match[0] or match[1] for match in w_a_q]
+    key_values = [(key, value or word) for key, value, word in key_vals]
+
+    print(key_values)
+
+
+    all_news = NewsPost.objects.all()
+    
+    query = Q()
+    for term in terms:
+        query |= Q(title__icontains = term) | Q(content__icontains = term)
+
+    news = all_news.filter(query).distinct()
+    
+    if tags:
+        matching_tags = PostTag.objects.filter(tag__in = tags)
+        news = all_news.filter(tags__in = matching_tags).distinct()
+
+
+
+    for key, val in key_values:
+        match key:
+            case "author":
+                users = ClimbUser.objects.filter(username__icontains = val)
+                news |= all_news.filter( author__in = users ).distinct()
+            case _:
+                pass
+
+
+    page_length = req.GET.get("page_count")
+    paginator = Paginator(news, page_length if page_length else 10)
+    page_number = req.GET.get("page")
+    ctx["data"] =  paginator.get_page(page_number)
+    ctx["search"] = search_term
+    return render(req, "widgets/news/tree.html", ctx)
