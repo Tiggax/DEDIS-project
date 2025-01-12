@@ -5,10 +5,11 @@ from django.contrib.auth.forms import UserCreationForm
 from api.forms import ClimbUserCreationForm, ClimbUserUpdateForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm
-
+from django.contrib.auth.decorators import login_required
 
 import json
 from pages.models import *
+from pages.forms import CommentForm
 
 
 
@@ -50,3 +51,37 @@ def render_template(req, object, id, template):
             pass
     print("request: {template} with {}", ctx["data"])
     return render(req, template, ctx)
+
+# Comments
+
+def comments(req, id):
+    ctx = {}
+    report = get_object_or_404(Report, id = id)
+    ctx["data"] = report.comments.all().order_by("created")
+    ctx["report"] = report
+
+    return render(req, "widgets/comment/tree.html", ctx)
+
+
+@login_required
+def post_comment(req, id):
+    ctx = {}
+    report = get_object_or_404(Report, id = id)
+    if req.method == "POST":
+        form = CommentForm(req.POST)
+        # validate
+        if form.is_valid():
+            data = form.cleaned_data
+            c = Comment()
+            c.content = data["content"]
+            c.creator = req.user
+            c.report_id = report
+            c.save()
+    else:
+        form = CommentForm()
+    
+    ctx["form"] = form
+    ctx["id"] = id
+
+    return render(req, "widgets/comment/new_comment.html", ctx)
+
