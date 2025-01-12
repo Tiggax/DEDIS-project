@@ -55,4 +55,10 @@ def news(req):
     paginator = Paginator(news, page_length if page_length else 10)
     page_number = req.GET.get("page")
     ctx["posts"] =  paginator.get_page(page_number)
+    ctx["default"] = news.first()
+    return render(req, "pages/news.html", ctx)
+
+def news_page(req, id):
+    ctx = {}
+    ctx["default"] = get_object_or_404(NewsPost, id = id)
     return render(req, "pages/news.html", ctx)

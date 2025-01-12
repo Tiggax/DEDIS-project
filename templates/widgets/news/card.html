@@ -3,6 +3,7 @@
         hx-get="{% url 'api:render' 'NewsPost' data.id 'widgets/news/post.html' %}"
         hx-target="#news--container"
         hx-swap="innerHTML"
+        hx-replace-url="{% url 'pages:news_page' data.id %}"
 
         class="btn"
     >
