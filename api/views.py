@@ -7,7 +7,8 @@ from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, Func
+from django.utils.html import strip_tags
 
 import json
 import re
@@ -102,21 +103,34 @@ def news(req):
     tags = re.findall(tags_regex, search_term)
     key_vals = re.findall(key_val_regex, search_term)
     
-
-    terms = [match[0] or match[1] for match in w_a_q]
+    words = [match[1] for match in w_a_q]
+    quotes = [match[0] for match in w_a_q]
     key_values = [(key, value or word) for key, value, word in key_vals]
 
-    print(key_values)
 
 
     all_news = NewsPost.objects.all()
     
     query = Q()
-    for term in terms:
-        query |= Q(title__icontains = term) | Q(content__icontains = term)
+    for word in words:
+        query |= Q(title__icontains = word ) | Q( content__icontains = word )
 
     news = all_news.filter(query).distinct()
-    
+
+    if quotes:
+        out = []    
+        for newspost in news:
+            for quote in quotes:
+                if (quote in strip_tags(newspost.content)):
+                    out.append(newspost.id)
+
+        if out:
+            print("in query")
+            query = Q()
+            for o in out:
+                query |= Q(id = o)
+            news = news.filter(query)
+
     if tags:
         matching_tags = PostTag.objects.filter(tag__in = tags)
         news = all_news.filter(tags__in = matching_tags).distinct()
@@ -127,17 +141,17 @@ def news(req):
         match key:
             case "author":
                 query = Q()
-                for field in ["username", "fist_name", "last_name"]:
+                for field in ["username", "first_name", "last_name"]:
                     query |= Q(**{f"{field}__icontains": val})
                 users = ClimbUser.objects.filter(query)
                 news |= all_news.filter( author__in = users ).distinct()
             case _:
                 pass
 
-
+    news = news.order_by("created")
     page_length = req.GET.get("page_count")
     paginator = Paginator(news, page_length if page_length else 10)
     page_number = req.GET.get("page")
     ctx["data"] =  paginator.get_page(page_number)
-    ctx["search"] = search_term
+    ctx["search"] = json.dumps(search_term)
     return render(req, "widgets/news/tree.html", ctx)
