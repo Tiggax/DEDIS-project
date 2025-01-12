@@ -12,4 +12,4 @@ class ReportFilter(django_filters.FilterSet):
     
     class Meta:
         model = Report
-        fields = ['title', 'created', 'content', 'report_creator', 'route']
+        fields = ['title', 'created', 'content', 'creator', 'route']

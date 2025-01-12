@@ -31,10 +31,10 @@ class Report(models.Model):
     title = models.CharField(max_length = 100)
     created = models.DateTimeField(auto_now_add = True)
     content = models.TextField()
-    report_creator = models.ForeignKey(
+    creator = models.ForeignKey(
         ClimbUser, 
         on_delete = models.CASCADE,
-        related_name="report_creator"
+        related_name="reports"
     )
     route = models.ForeignKey(Route, on_delete = models.CASCADE)
 
@@ -54,15 +54,15 @@ class GalleryImage(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
-    comment_creator = models.ForeignKey(
+    creator = models.ForeignKey(
         ClimbUser, 
         on_delete = models.CASCADE,
-        related_name="comment_creator"
+        related_name="comments"
     )
-    report_id = models.ForeignKey(Report, on_delete = models.CASCADE)
+    report_id = models.ForeignKey(Report, on_delete = models.CASCADE, related_name="comments")
 
     def __str__(self):
-        return f"{self.comment_creator.username}: {self.created}"
+        return f"{self.creator.username}: {self.created}"
 
 class PostTag(models.Model):
     tag = models.CharField( max_length = 20)
@@ -74,10 +74,10 @@ class NewsPost(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     title = models.TextField()
     content = models.TextField()
-    post_author = models.ForeignKey(
+    author = models.ForeignKey(
         ClimbUser,
         on_delete = models.CASCADE,
-        related_name="post_author"
+        related_name="posts"
     )
     tags = models.ManyToManyField(PostTag, blank=True)
     
