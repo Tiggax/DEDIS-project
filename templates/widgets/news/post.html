@@ -1,0 +1,10 @@
+<h1>{{data.title}}</h1>
+<p><b>{{data.author}}</b></p>
+<p><b>{{data.created}}</b></p>
+
+{{data.content | safe}}
+
+
+{% for tag in data.tags.all %}
+<p>{{tag}}</p>
+{% endfor %}

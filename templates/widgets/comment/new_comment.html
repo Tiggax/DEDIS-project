@@ -1,0 +1,15 @@
+<div class="card shadow bg-primary" id="new_comment">
+    <form 
+    hx-post="{% url 'api:post_comment' id %}" 
+    hx-trigger="submit"
+    hx-target="this"
+    hx-on::after-request="this.reset()"
+    >
+        {% csrf_token %}
+        {{form}}
+        <button
+        id="comment-submit"
+        type="submit"
+        >Post</button>
+    </form>
+</div>

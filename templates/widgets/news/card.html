@@ -1,0 +1,12 @@
+<div
+        hx-trigger="click"
+        hx-get="{% url 'api:render' 'NewsPost' data.id 'widgets/news/post.html' %}"
+        hx-target="#news--container"
+        hx-swap="innerHTML"
+        hx-replace-url="{% url 'pages:news_page' data.id %}"
+
+        class="btn"
+    >
+        <strong>{{data.title}}</strong>
+        <small>{{data.content | safe | truncatechars_html:50}}</small>
+</div>
