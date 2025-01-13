@@ -3,7 +3,7 @@
     hx-post="{% url 'api:post_comment' id %}" 
     hx-trigger="submit"
     hx-target="this"
-    hx-on::after-request="this.reset()"
+    hx-on::after-request="if(event.detail.successful) document.getElementById('note-input').value = ''"
     >
         {% csrf_token %}
         {{form}}

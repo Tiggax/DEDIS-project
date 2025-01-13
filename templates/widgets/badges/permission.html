@@ -1,0 +1,15 @@
+<div>
+    <span
+    class="
+    badge
+    bg-{% if user.rank == 'U' %}secondary
+    {% elif user.rank == 'A' %}success
+    {% elif user.rank == 'M' %}warning
+    {% else %}danger
+    {% endif %}
+    "
+        >
+        {{user.get_permission_display}}
+    </span>
+
+</div>
