@@ -1,0 +1,25 @@
+<div class="border p-5 m-5 rounded-4">
+    <form 
+    id="update-form"
+    class="col"
+    hx-post="{% url 'accounts:update' 'e' %}"
+    hx-trigger="submit"
+    hx-swap="outerHTML settle:1s"
+    hx-disabled-elt="this"
+    >
+        {% csrf_token %}
+        <p>{{user.username}}</p>
+        <p>{{user.email}}</p>
+        <p>{{user.get_rank_display}}</p>
+        <p>{{user.get_permission_display}}</p>
+
+        
+        {% include "widgets/forms/text.html" with target="first_name" form=forms.first_name%}
+
+        <span id="process-first_name" class="htmx-indicator spinner-border" role="status">
+            <span class="sr-only"></span>
+         </span>
+        {{form.as_p}}
+        <button type="submit" class="row btn btn-primary w-100">Posodobi</button>
+    </form>
+</div>
