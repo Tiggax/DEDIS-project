@@ -31,10 +31,26 @@ class SignUpView(CreateView):
     template_name = "registration/signup.html"
 
 
-class UpdateView(CreateView):
-    form_class = ClimbUserUpdateForm
-    success_url = reverse_lazy("accounts:update")
-    template_name = "registration/signup.html"
+
+@login_required
+def update_user(req):
+    ctx={}
+
+    if req.method=="POST":
+        pass
+    else:
+        form = ClimbUserUpdateForm(instance=req.user)
+    
+    ctx["form"]=form
+
+    return render(req, "widgets/forms/form_profile.html", ctx)
+
+
+#user=ClimbUser.objects.get(pk=.request.user.details.id)
+# class UpdateView(CreateView):
+#     form_class = ClimbUserUpdateForm(instance=user)
+#     success_url = reverse_lazy("accounts:update")
+#     template_name = "registration/profile.html"
 
 class UpdatePassword(PasswordChangeView):
     form_class = PasswordChangeForm
