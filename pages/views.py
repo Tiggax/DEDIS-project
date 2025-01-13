@@ -12,6 +12,10 @@ from django.core.paginator import Paginator
 def index(req):
     ctx = {}
     ctx["content"] = "pages index"
+    news = NewsPost.objects.order_by("created")
+    ctx["news_post"] = news.first()
+    news = Report.objects.order_by("created")
+    ctx["report"] = news.first()
     return render(req, "pages/home.html", ctx)
 
 def about_us(req):

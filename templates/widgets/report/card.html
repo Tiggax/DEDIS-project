@@ -1,8 +1,20 @@
-<a href="{% url 'pages:report' data.id %}" class="card shadow w-75 p-4 m-5 col list-group-item list-group-item-action">
+<div
+    hx-trigger="click"
+    hx-get="{% url 'api:render' 'Report' data.id 'widgets/report/post.html' %}"
+    hx-target="#report--container"
+    hx-swap="innerHTML"
+    hx-replace-url="{% url 'pages:report' data.id %}"
+    class="btn btn-secondary text-start my-2"
+>
+    <p><strong>{{data.title}}</strong><p>
+    <small>{{data.content | safe | truncatechars_html:42}}</small>
+</div>
+
+{% comment %} <a href="{% url 'pages:report' data.id %}" class="card shadow w-75 p-4 m-3 col list-group-item list-group-item-action">
     <h2>{{ data.title }}</h2>
     <p class="card-text">{{data.content|safe|truncatechars_html:500}}</p>
     <div class="row">
     <p class="text-body-secondary col">{{data.creator}}</p>
     <p class="text-body-secondary col text-end">{{data.created}}</p>
     </div>
-</a>
+</a> {% endcomment %}

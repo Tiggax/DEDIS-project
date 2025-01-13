@@ -3,17 +3,26 @@
 {% block content %}
 
 <div class="row border h-100 rounded">
-    <div class="col-8 d-flex flex-column shadow">
+    <div class="col-10 d-flex flex-column shadow">
     <h1 class="text-center my-3">DOBRODOŠLI</h1>
-
-    <h2> Zadnje novice: </h2>
-    <div class="section border rounded p-2">
-        {% include "widgets/news/post.html" with data=news_post %}
+    <div class="row row-cols-1">
+    <div class="col pb-5">
+        <h2> ZADNJE NOVICE </h2>
+        <div class="section border rounded p-2">
+            <a href="news" class="list-group-item list-group-item-action">
+            {% include "widgets/news/post.html" with data=news_post %}
+            </a>
+        </div>
     </div>
-    <h2> Zadnje poročilo: </h2>
-    <div class="section border rounded p-2">
-        {% include "widgets/report/post.html" with data=report %}
+    <div class="col">
+    <h2> ZADNJE POROČILO </h2>
+        <div class="section border rounded p-2">
+            <a href="reports" class="list-group-item list-group-item-action">
+            {% include "widgets/report/post.html" with data=report %}
+            </a>
+        </div>
     </div>
+</div>
 </div>
 
     <div class="col border-start d-flex flex-column">

@@ -1,0 +1,16 @@
+{% for post in data %}
+  {% include "widgets/report/card.html" with data=post %}
+{% endfor %}
+{% if data.next_page_number <= data.paginator.num_pages %}
+<div
+hx-post="{% url 'api:reports' %}?page={{ data.next_page_number }}"
+hx-trigger="intersect once"
+hx-swap="outerHTML"
+hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}", "search": {{search}} }'
+class="text-center"
+>
+  <div class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+</div>
+{% endif %}

@@ -205,3 +205,63 @@ def news(req):
     ctx["data"] =  paginator.get_page(page_number)
     ctx["search"] = json.dumps(search_term)
     return render(req, "widgets/news/tree.html", ctx)
+
+def reports(req):
+    ctx = {}
+    search_term = req.POST["search"] if req.POST["search"] else ""
+
+    w_a_q_regex = r'"([^"]+)"|(\b\w+\b)'
+    tags_regex = r'#(\w+)'
+    key_val_regex = r'(\w+):(?:"([^"]+)"|(\w+))'
+
+    w_a_q = re.findall(w_a_q_regex, search_term)
+    tags = re.findall(tags_regex, search_term)
+    key_vals = re.findall(key_val_regex, search_term)
+    
+    words = [match[1] for match in w_a_q if match[1]]
+    quotes = [match[0] for match in w_a_q if match[0]]
+    key_values = [(key, value or word) for key, value, word in key_vals]
+
+
+
+    all_reports = Report.objects.all()
+    
+    query = Q()
+    for word in words:
+        query &= (Q(title__icontains = word ) | Q( content__icontains = word ))
+    reports = all_reports.filter(query).distinct()
+
+    if quotes:
+        query = Q()
+        for report in reports:
+            for quote in quotes:
+                if (quote in strip_tags(report.content)) or (quote in report.title):
+                    query |= Q(id = report.id)
+        if query == Q():
+            report = reports.none()
+        else:
+            report = reports.filter(query).distinct()
+
+    if tags:
+        matching_tags = PostTag.objects.filter(tag__in = tags)
+        reports |= reports.filter(tags__in = matching_tags).distinct()
+
+
+    for key, val in key_values:
+        match key:
+            case "author":
+                query = Q()
+                for field in ["username", "first_name", "last_name"]:
+                    query |= Q(**{f"{field}__icontains": val})
+                users = ClimbUser.objects.filter(query)
+                reports |= all_reports.filter( author__in = users ).distinct()
+            case _:
+                pass
+
+    reports = reports.distinct().order_by("created")
+    page_length = req.GET.get("page_count")
+    paginator = Paginator(reports, page_length if page_length else 10)
+    page_number = req.GET.get("page")
+    ctx["data"] =  paginator.get_page(page_number)
+    ctx["search"] = json.dumps(search_term)
+    return render(req, "widgets/report/tree.html", ctx)

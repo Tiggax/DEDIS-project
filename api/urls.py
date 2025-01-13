@@ -37,6 +37,7 @@ apis = ([
     path('comments/<uuid:id>', views.comments, name="comments"),
     path('comment/<uuid:id>', views.post_comment, name="post_comment"),
     path('news', views.news, name="news"),
+    path('reports', views.reports, name="reports"),
 ], "api")
 
 
