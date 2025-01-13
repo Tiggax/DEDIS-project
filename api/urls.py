@@ -33,7 +33,6 @@ accounts = ([
 ], "accounts")
 
 apis = ([
-    path('', views.index),
     path('render/<str:object>/<uuid:id>/<path:template>', views.render_template, name="render"),
     path('comments/<uuid:id>', views.comments, name="comments"),
     path('comment/<uuid:id>', views.post_comment, name="post_comment"),

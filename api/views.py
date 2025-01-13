@@ -1,8 +1,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.views.generic import CreateView
-from django.contrib.auth.forms import UserCreationForm
-from api.forms import ClimbUserCreationForm, ClimbUserUpdateForm
+from api.forms import ClimbUserCreationForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -19,12 +18,6 @@ from pages.forms import CommentForm
 
 # Create your views here.
 
-def index(req):
-    ctx = {}
-    ctx["title"] = "Alpine API Index"
-    ctx["content"] = "api index"
-    return render(req, "pages/example.html", ctx)
-
 class SignUpView(CreateView):
     form_class = ClimbUserCreationForm
     success_url = reverse_lazy("accounts:login")
@@ -33,7 +26,6 @@ class SignUpView(CreateView):
 @login_required
 def user_settings(req):
     ctx = {}
-    ctx["form"] = ClimbUserUpdateForm(instance = req.user)
     return render(req, "registration/profile.html", ctx)
 
 @login_required
@@ -151,7 +143,7 @@ def comments(req, id):
     return render(req, "widgets/comment/tree.html", ctx)
 
 
-@login_required
+
 def post_comment(req, id):
     ctx = {}
     report = get_object_or_404(Report, id = id)

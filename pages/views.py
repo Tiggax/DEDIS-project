@@ -23,14 +23,6 @@ def about_us(req):
     ctx["content"] = "cntnt"
     return render(req, "pages/about_us.html", ctx)
 
-
-
-@login_required
-def logged_in_user_page(req):
-    ctx = {}
-    ctx["content"] = "user logged in"
-    return render(req, "pages/example.html", ctx)
-
 # Reports
 
 def reports(req):
@@ -43,7 +35,7 @@ def report(req, id):
     ctx = {}
     report = get_object_or_404(Report, id=id)
     ctx["default"] = report
-    return render(req, "pages/report.html", ctx)
+    return render(req, "pages/reports.html", ctx)
 
 # News
 
