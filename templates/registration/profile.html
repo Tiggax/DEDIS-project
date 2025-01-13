@@ -1,0 +1,8 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<div>
+    {% include "widgets/forms/form_generic.html" with form=form submitname="Posodobi" %}
+</div>
+{% endblock content %}

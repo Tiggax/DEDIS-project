@@ -1,6 +1,6 @@
 from api import settings
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from api.models import ClimbUser
 
@@ -18,4 +18,11 @@ class ClimbUserCreationForm(UserCreationForm):
 
 
 class ClimbUserUpdateForm(UserChangeForm):
-    pass
+    class Meta:
+        model = ClimbUser
+        fields = ('username', 'first_name', 'last_name', 'email', 'password')
+
+    def __init__(self, *args, **kwargs):
+        super(ClimbUserUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['username'].disabled = True
+        self.fields['email'].disabled = True

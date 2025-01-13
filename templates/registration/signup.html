@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block content %}
-<div class="container col p-5 mt-5 card shadow w-50">
+<div class="container col p-5 mt-5 card shadow w-50 mb-5">
   <div class="row">
     <img class="mb-3" src="{% static 'images/textlogo.png' %}" alt="">
   <div>
-
-  <form method="post" class="">
+  {% include "widgets/forms/form_generic.html" with form=form submitname="Prijava" %}
+  {% comment %} <form method="post" class="">
     {% csrf_token %}
-    <table class="table" >{{ form.as_table }}</table>
+    <table class="table table-sm" >{{ form.as_table }}</table>
     <button type="submit" class="btn btn-primary w-100">Prijava</button>
-  </form>
+  </form> {% endcomment %}
 </div>
 {% endblock content %}

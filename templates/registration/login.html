@@ -12,13 +12,7 @@
     <img class="mb-3" src="{% static 'images/textlogo.png' %}" alt="">
   <div>
 
-  <form method="post" class="">
-
-    {% comment %} <h1 class="h3 mb-3 fw-normal">Prijava</h1>  {% endcomment %}
-    {% csrf_token %}
-    <table class="table" >{{ form.as_table }}</table>
-    <button type="submit" class="btn btn-primary w-100">Prijava</button>
-  </form>
+  {% include "widgets/forms/form_generic.html" with form=form submitname="Prijava" %}
 </div>
 {% endblock content %}
 
