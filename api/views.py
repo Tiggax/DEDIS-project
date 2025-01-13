@@ -113,26 +113,24 @@ def news(req):
     
     query = Q()
     for word in words:
-        query &= Q(title__icontains = word ) & Q( content__icontains = word )
-
+        query &= (Q(title__icontains = word ) | Q( content__icontains = word ))
     news = all_news.filter(query).distinct()
 
     if quotes:
         out = []
         for newspost in news:
             for quote in quotes:
-                if (quote in strip_tags(newspost.content)) or quote in newspost.title:
+                if (quote in strip_tags(newspost.content)) or (quote in newspost.title):
                     out.append(newspost.id)
         if out:
             query = Q()
             for o in out:
-                query &= Q(id = o)
-            news = news.filter(query)
+                query |= Q(id = o)
+            news = news.filter(query).distinct()
 
     if tags:
         matching_tags = PostTag.objects.filter(tag__in = tags)
-        news = news.filter(tags__in = matching_tags).distinct()
-
+        news |= news.filter(tags__in = matching_tags).distinct()
 
 
     for key, val in key_values:
@@ -146,7 +144,9 @@ def news(req):
             case _:
                 pass
 
-    news = news.order_by("created")
+    print(news)
+
+    news = news.distinct().order_by("created")
     page_length = req.GET.get("page_count")
     paginator = Paginator(news, page_length if page_length else 10)
     page_number = req.GET.get("page")
