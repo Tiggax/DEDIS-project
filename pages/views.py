@@ -54,7 +54,7 @@ def report(req, id):
 
 def news(req):
     ctx = {}
-    news = NewsPost.objects.order_by("created")
+    news = NewsPost.objects.order_by("created").reverse()
     ctx["default"] = news.first()
     return render(req, "pages/news.html", ctx)
 

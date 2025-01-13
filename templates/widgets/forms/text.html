@@ -1,14 +1,18 @@
 <form
-hx-post="{% url 'accounts:update' target %}"
+hx-post="{% url 'accounts:update' target t_user.id %}"
 hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
 hx-target="this"
 hx-swap="outerHTML"
 hx-indicator="#update-{{target}}"
 >   
     {% csrf_token %}
+    {% for ms in messages %}
+    <li>{{ms}}</li>
+    {% endfor %}
     <input
     name="{{target}}"
     value="{{value}}"
+    {% if disabled %}disabled{% endif %}
     >
     <span id="update-{{target}}" class="htmx-indicator spinner-border" role="status">
         <span class="sr-only"></span>

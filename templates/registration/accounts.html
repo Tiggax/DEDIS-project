@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="section">
+    <table>
+    {% for u in users %}
+        {% include "widgets/forms/profile_item.html" with data=u %}
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock content %}

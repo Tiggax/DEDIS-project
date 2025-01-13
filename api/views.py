@@ -42,39 +42,57 @@ def update_user(req, field, target_user_id):
     ctx["messages"] = []
     ctx["target"] = field
     user = req.user
-
-    match field:
-        case "first_name" | "last_name" :
-            field_widget = "widgets/forms/text.html"
-        case _:
-            field_widget = None
-            return HttpResponse("<div>Cannot find widget</div>")
-        
+    
     try:
         target_user = ClimbUser.objects.get(id = target_user_id)
     except:
         return HttpResponse("<div>Target not found</div>")
-
+    
     ctx["t_user"] = target_user
     ctx["value"] = getattr(target_user, field)
-    if req.method == "GET":
-        return render(req, field_widget, ctx)
-
-    data = req.POST
-    ctx["value"] = data[field] if field in data else "NODATA"
     
+    match field:
+        case "first_name" | "last_name" :
+            field_widget = "widgets/forms/text.html"
+        case "permission":
+            ctx["disabled"] = True
+            ctx["options"] = ClimbUser.PERMISSIONS 
+            field_widget = "widgets/forms/options.html"
+        case "rank":
+            ctx["disabled"] = True
+            ctx["options"] = ClimbUser.RANKS 
+            field_widget = "widgets/forms/options.html"
+        case _:
+            field_widget = None
+            return HttpResponse("<div>Cannot find widget</div>")
 
     match user.permission:
         case "U":
             if user.id != target_user.id:
                 return HttpResponse(f"<div>You don't have access to this content</div>")
-            
         case "A":
             if user.id != target_user.id:
-                return HttpResponse(f"<div>You don't have access to this content</div>")
+                ctx["disabled"] = True
+                return render(req, field_widget, ctx)
             pass
         case "M":
+            if user.id != target_user.id or field == "rank":
+                ctx["disabled"] = False
             pass
+
+    # admin protection
+    if target_user.is_staff or target_user.is_superuser:
+        ctx["disabled"] = True
+
+    # admin is god
+    if user.is_staff or user.is_superuser:
+        ctx["disabled"] = False
+
+    if req.method == "GET":
+        return render(req, field_widget, ctx)
+
+    data = req.POST
+    ctx["value"] = data[field] if field in data else "NODATA"
 
 
     # validate
@@ -84,6 +102,10 @@ def update_user(req, field, target_user_id):
             user.first_name = data[field]
         case "last_name":
             user.last_name = data[field]
+        case "rank":
+            user.rank = data[field]
+        case "permission":
+            user.permission = data[field]
         case _:
             pass
     
@@ -96,6 +118,13 @@ class UpdatePassword(PasswordChangeView):
     success_url = reverse_lazy("accounts:update")
     template_name = "registration/signup.html"
 
+
+@login_required
+def list_accounts(req):
+    ctx = {}
+    users = ClimbUser.objects.all()
+    ctx["users"] = users
+    return render(req, "registration/accounts.html", ctx)
 
 def render_template(req, object, id, template):
     ctx = {}
@@ -198,7 +227,7 @@ def news(req):
             case _:
                 pass
 
-    news = news.distinct().order_by("created")
+    news = news.distinct().order_by("created").reverse()
     page_length = req.GET.get("page_count")
     paginator = Paginator(news, page_length if page_length else 10)
     page_number = req.GET.get("page")

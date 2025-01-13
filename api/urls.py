@@ -29,6 +29,7 @@ accounts = ([
     path('update/<str:field>/<uuid:target_user_id>', views.update_user, name = "update"),
     path('password/', views.UpdatePassword.as_view(), name="password"),
     path("", include("django.contrib.auth.urls")),
+    path("", views.list_accounts, name = ""),
 ], "accounts")
 
 apis = ([
@@ -47,7 +48,7 @@ urlpatterns = [
     path('api/', include(apis)),
     path('api/summernote/', include('django_summernote.urls')), # manual move out of "api:..."
     path('accounts/',include(accounts)),
-    path('', include("pages.urls"))
+    path('', include("pages.urls")),
 ]
 
 if settings.DEBUG:

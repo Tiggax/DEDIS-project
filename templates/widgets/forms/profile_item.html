@@ -1,0 +1,43 @@
+<div class="row border rounded">
+  {% comment %} <div class="col">
+    <div class="row"><input name='name' value='{{data.username}}' disabled="true" ></div>
+    <div class="row"><input name='name' value='{{data.email}}' disabled="true" ></div>
+  </div>
+  <div class="col">
+  <div class="row"><input name='name' value='{{data.first_name}}' disabled="true" ></div>
+  <div class="row"><input name='name' value='{{data.last_name}}' disabled="true" ></div>
+  </div> {% endcomment %}
+
+  <div class="col">
+    <div class="row">
+    <p>
+        Ime: 
+        <div 
+        hx-get="{% url 'accounts:update' 'first_name' data.id %}"
+        hx-target="this"
+        hx-swap="outerHTML"
+        hx-trigger="load"
+        ></div>
+    </p>
+
+    <p>
+      <div 
+      hx-get="{% url 'accounts:update' 'rank' data.id %}"
+      hx-target="this"
+      hx-swap="outerHTML"
+      hx-trigger="load"
+      >
+      </div>
+    </p>
+
+    <p>
+      <div 
+      hx-get="{% url 'accounts:update' 'permission' data.id %}"
+      hx-target="this"
+      hx-swap="outerHTML"
+      hx-trigger="load"
+      ></div>
+  </p>
+    </div>
+  </div>
+</div>
