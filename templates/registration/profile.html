@@ -2,7 +2,13 @@
 {% load static %}
 
 {% block content %}
-<div>
-    {% include "widgets/forms/form_generic.html" with form=form submitname="Posodobi" %}
-</div>
+
+<p>{{user.username}}</p>
+<p>{{user.get_permission_display}}</p>
+<p>{{user.get_rank_display}}</p>
+<p>{{user.email}}</p>
+
+<p> Ime: {% include "widgets/forms/text.html" with target="first_name" value=user.first_name %}</p>
+<p> Priimek: {% include "widgets/forms/text.html" with target="last_name"  value=user.last_name %}</p>
+
 {% endblock content %}

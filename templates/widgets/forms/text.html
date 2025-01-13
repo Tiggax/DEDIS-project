@@ -1,0 +1,16 @@
+<form
+hx-post="{% url 'accounts:update' target %}"
+hx-trigger="input changed delay:500ms, keyup[key=='Enter']"
+hx-target="this"
+hx-swap="outerHTML"
+hx-indicator="#update-{{target}}"
+>   
+    {% csrf_token %}
+    <input
+    name="{{target}}"
+    value="{{value}}"
+    >
+    <span id="update-{{target}}" class="htmx-indicator spinner-border" role="status">
+        <span class="sr-only"></span>
+    </span>
+</form>

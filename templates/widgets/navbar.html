@@ -35,7 +35,7 @@
             {{user.username}}
           </div>
           <div class="d-flex" role="button">
-            <a class="btn btn-primary" href="{% url 'accounts:update' %}">My profile</a>
+            <a class="btn btn-primary" href="{% url 'accounts:profile' %}">My profile</a>
             <div class="p-1"></div>
             <form action="{% url 'accounts:logout' %}" method="post" >
               {% csrf_token %}

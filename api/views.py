@@ -30,20 +30,33 @@ class SignUpView(CreateView):
     success_url = reverse_lazy("accounts:login")
     template_name = "registration/signup.html"
 
-
+@login_required
+def user_settings(req):
+    ctx = {}
+    ctx["form"] = ClimbUserUpdateForm(instance = req.user)
+    return render(req, "registration/profile.html", ctx)
 
 @login_required
-def update_user(req):
-    ctx={}
-
-    if req.method=="POST":
-        pass
-    else:
-        form = ClimbUserUpdateForm(instance=req.user)
-    
-    ctx["form"]=form
-
-    return render(req, "widgets/forms/form_profile.html", ctx)
+def update_user(req, field):
+    AUTHORIZED_FIELDS = ["first_name", "last_name"]
+    ctx = {}
+    print(req.user)
+    #form = forms.TextInput(req.user)
+    if req.method == "POST":
+        data = req.POST
+        # validate
+        user = get_object_or_404(ClimbUser, id = req.user.id)
+        match field:
+            case "first_name":
+                user.first_name = data[field]
+            case "last_name":
+                user.last_name = data[field]
+            case _:
+                pass
+        user.save()
+    ctx["target"] = field
+    ctx["value"] = getattr(user, field)
+    return render(req, "widgets/forms/text.html", ctx)
 
 
 #user=ClimbUser.objects.get(pk=.request.user.details.id)

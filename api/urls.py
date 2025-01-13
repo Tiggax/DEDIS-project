@@ -25,7 +25,8 @@ from . import views
 
 accounts = ([
     path('signup/', views.SignUpView.as_view(), name = "signup"),
-    path('update/', views.update_user, name = "update"),
+    path('profile/', views.user_settings, name = "profile" ),
+    path('update/<str:field>', views.update_user, name = "update"),
     path('password/', views.UpdatePassword.as_view(), name="password"),
     path("", include("django.contrib.auth.urls")),
 ], "accounts")
