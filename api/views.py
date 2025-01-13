@@ -117,15 +117,14 @@ def news(req):
     news = all_news.filter(query).distinct()
 
     if quotes:
-        out = []
+        query = Q()
         for newspost in news:
             for quote in quotes:
                 if (quote in strip_tags(newspost.content)) or (quote in newspost.title):
-                    out.append(newspost.id)
-        if out:
-            query = Q()
-            for o in out:
-                query |= Q(id = o)
+                    query |= Q(id = newspost.id)
+        if query == Q():
+            news = news.none()
+        else:
             news = news.filter(query).distinct()
 
     if tags:
@@ -143,8 +142,6 @@ def news(req):
                 news |= all_news.filter( author__in = users ).distinct()
             case _:
                 pass
-
-    print(news)
 
     news = news.distinct().order_by("created")
     page_length = req.GET.get("page_count")
