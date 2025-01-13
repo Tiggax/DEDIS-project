@@ -37,33 +37,59 @@ def user_settings(req):
     return render(req, "registration/profile.html", ctx)
 
 @login_required
-def update_user(req, field):
-    AUTHORIZED_FIELDS = ["first_name", "last_name"]
+def update_user(req, field, target_user_id):
     ctx = {}
-    print(req.user)
-    #form = forms.TextInput(req.user)
-    if req.method == "POST":
-        data = req.POST
-        # validate
-        user = get_object_or_404(ClimbUser, id = req.user.id)
-        match field:
-            case "first_name":
-                user.first_name = data[field]
-            case "last_name":
-                user.last_name = data[field]
-            case _:
-                pass
-        user.save()
+    ctx["messages"] = []
     ctx["target"] = field
-    ctx["value"] = getattr(user, field)
-    return render(req, "widgets/forms/text.html", ctx)
+    user = req.user
+
+    match field:
+        case "first_name" | "last_name" :
+            field_widget = "widgets/forms/text.html"
+        case _:
+            field_widget = None
+            return HttpResponse("<div>Cannot find widget</div>")
+        
+    try:
+        target_user = ClimbUser.objects.get(id = target_user_id)
+    except:
+        return HttpResponse("<div>Target not found</div>")
+
+    ctx["t_user"] = target_user
+    ctx["value"] = getattr(target_user, field)
+    if req.method == "GET":
+        return render(req, field_widget, ctx)
+
+    data = req.POST
+    ctx["value"] = data[field] if field in data else "NODATA"
+    
+
+    match user.permission:
+        case "U":
+            if user.id != target_user.id:
+                return HttpResponse(f"<div>You don't have access to this content</div>")
+            
+        case "A":
+            if user.id != target_user.id:
+                return HttpResponse(f"<div>You don't have access to this content</div>")
+            pass
+        case "M":
+            pass
 
 
-#user=ClimbUser.objects.get(pk=.request.user.details.id)
-# class UpdateView(CreateView):
-#     form_class = ClimbUserUpdateForm(instance=user)
-#     success_url = reverse_lazy("accounts:update")
-#     template_name = "registration/profile.html"
+    # validate
+    
+    match field:
+        case "first_name":
+            user.first_name = data[field]
+        case "last_name":
+            user.last_name = data[field]
+        case _:
+            pass
+    
+    user.save()
+    
+    return render(req, field_widget, ctx)
 
 class UpdatePassword(PasswordChangeView):
     form_class = PasswordChangeForm
