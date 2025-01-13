@@ -1,4 +1,4 @@
-<div class="card shadow bg-primary" id="new_comment">
+<div class="shadow p-4 m-5 col" id="new_comment">
     <form 
     hx-post="{% url 'api:post_comment' id %}" 
     hx-trigger="submit"
@@ -10,6 +10,7 @@
         <button
         id="comment-submit"
         type="submit"
+        class="btn btn-primary"
         >Post</button>
     </form>
 </div>

@@ -6,11 +6,15 @@
     <div class="col-8 d-flex flex-column shadow">
     <h1 class="text-center my-3">DOBRODOŠLI</h1>
 
-
-    <div class="section border">
-        {% lorem 10 %}
+    <h2> Zadnje novice: </h2>
+    <div class="section border rounded p-2">
+        {% include "widgets/news/post.html" with data=news_post %}
     </div>
+    <h2> Zadnje poročilo: </h2>
+    <div class="section border rounded p-2">
+        {% include "widgets/report/post.html" with data=report %}
     </div>
+</div>
 
     <div class="col border-start d-flex flex-column">
     <h3 class="text-center my-3 mx-3">KORISTNE POVEZAVE</h3>
@@ -22,7 +26,6 @@
         <a class="list-group-item list-group-item-action" href="http://ka.pzs.si/">Komisija za alpinizem</a>
         <a class="list-group-item list-group-item-action" href="http://www.pzs.si/">PZS</a>
         <a class="list-group-item list-group-item-action" href="http://www.plezanje.net/climbing/index.asp">plezanje.net</a>
-        <a class="list-group-item list-group-item-action" href="http://www.montagna.org">montagna.org</a>
         <a class="list-group-item list-group-item-action" href="http://www.planetmountain.com">Planet mountain</a>
         <a class="list-group-item list-group-item-action" href="http://www.primorskestene.com">Primorske stene</a>
         <a class="list-group-item list-group-item-action" href="http://www.sneznik.net">Snežnik</a>
@@ -32,11 +35,11 @@
     <button class="my-1 mx-3 btn btn-primary" data-bs-toggle="collapse" href="#vremenske" aria-expanded="false" aria-controls="vremenske">Vremenske, lavinske in ledne razmere</button>
     {% comment %} <strong class="my-2">Vremenske, lavinske in ledne razmere</strong> {% endcomment %}
     <div class="list-group collapse mx-3" id="vremenske">
-        <a class="list-group-item list-group-item-action" href="http://www.arso.gov.si/vreme/napovedi%20in%20podatki/">ARSO</a>
+        <a class="list-group-item list-group-item-action" href="http://www.arso.gov.si/vreme/napovedi_in_podatki/">ARSO</a>
         <a class="list-group-item list-group-item-action" href="http://meteo.hr/index.php">Meteo Hrvaška</a>
         <a class="list-group-item list-group-item-action" href="http://www.ilmeteo.it/meteo-europa/slovenia">ilmeteo.it</a>
         <a class="list-group-item list-group-item-action" href="http://www.regione.fvg.it/asp/newvalanghe/">FVG lavinska napoved</a>
-        <a class="list-group-item list-group-item-action" href="http://www.plazovi.info/plazovi/snezni_plazovi.html">Plazovi info</a>
+        <a class="list-group-item list-group-item-action" href="https://plazovi.info/sne%C5%BEni-plaz">Plazovi info</a>
     </div>
 
 
@@ -45,8 +48,8 @@
     <div class="list-group collapse mx-3" id="trgovine">
     <a class="list-group-item list-group-item-action" href="http://www.iglusport.si/" target="_blank" rel="noopener">Iglu šport</a>
     <a class="list-group-item list-group-item-action" href="http://www.promontana.si/" target="_blank" rel="noopener">Promontana</a>
-    <a class="list-group-item list-group-item-action" href="http://www.kibuba.com/index.php" target="_blank" rel="noopener">Kibuba</a>
-    <a class="list-group-item list-group-item-action" href="http://www.climbersonly.net/" target="_blank" rel="noopener">ClimbersOnly.net</a>
+    <a class="list-group-item list-group-item-action" href="http://www.kibuba.com" target="_blank" rel="noopener">Kibuba</a>
+    <a class="list-group-item list-group-item-action" href="https://www.tnfshop.si/" target="_blank" rel="noopener">tnfshop.si</a>
     <a class="list-group-item list-group-item-action" href="http://www.sportler.com/sportlershop/ingresso;jsessionid=xdsofuxpyjgcpypkhmkoemex">Sportler</a>
     </div>
 
