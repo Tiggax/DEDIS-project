@@ -28,6 +28,12 @@
                 {% url 'pages:about_us' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">O nas</a> 
               </li>
+              {% if user.permission != "U" %}
+              <li class="nav-item">
+                {% url 'accounts:' as link %}
+                <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Uporabniki</a> 
+              </li>
+              {% endif %}
           </div>
           {% if user.is_authenticated %}
           <div class="d-flex">
