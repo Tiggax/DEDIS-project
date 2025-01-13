@@ -4,25 +4,26 @@
 
 <div class="row border h-100 rounded">
     <div class="col-10 d-flex flex-column shadow">
-    <h1 class="text-center my-3">DOBRODOŠLI</h1>
-    <div class="row row-cols-1">
-    <div class="col pb-5">
-        <h2> ZADNJE NOVICE </h2>
-        <div class="section border rounded p-2">
-            <a href="news" class="list-group-item list-group-item-action">
-            {% include "widgets/news/post.html" with data=news_post %}
-            </a>
+        <h1 class="text-center my-3">DOBRODOŠLI</h1>
+        <div class="row row-cols-1">
+        
+        <div class="col pb-3">
+        <h2> ZADNJE POROČILO </h2>
+            <div class="section border rounded p-2 btn btn-primary w-100 text-start mb-2">
+                <a href="reports" class="list-group-item list-group-item-action">
+                {% include "widgets/report/post.html" with data=report %}
+                </a>
+            </div>
+        </div>
+        <div class="col pb-3">
+            <h2> ZADNJE NOVICE </h2>
+            <div class="section border rounded p-2 btn btn-secondary w-100 text-start">
+                <a href="news" class="list-group-item list-group-item-action">
+                {% include "widgets/news/post.html" with data=news_post %}
+                </a>
+            </div>
         </div>
     </div>
-    <div class="col">
-    <h2> ZADNJE POROČILO </h2>
-        <div class="section border rounded p-2">
-            <a href="reports" class="list-group-item list-group-item-action">
-            {% include "widgets/report/post.html" with data=report %}
-            </a>
-        </div>
-    </div>
-</div>
 </div>
 
     <div class="col border-start d-flex flex-column">
