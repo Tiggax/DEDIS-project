@@ -212,7 +212,7 @@ def news(req):
             news = news.filter(query).distinct()
 
     if tags:
-        matching_tags = PostTag.objects.filter(tag__in = tags)
+        matching_tags = Tag.objects.filter(tag__in = tags)
         news |= news.filter(tags__in = matching_tags).distinct()
 
 
@@ -272,7 +272,7 @@ def reports(req):
             report = reports.filter(query).distinct()
 
     if tags:
-        matching_tags = PostTag.objects.filter(tag__in = tags)
+        matching_tags = Tag.objects.filter(tag__in = tags)
         reports |= reports.filter(tags__in = matching_tags).distinct()
 
 
