@@ -113,7 +113,7 @@ def news(req):
     
     query = Q()
     for word in words:
-        query |= Q(title__icontains = word ) | Q( content__icontains = word )
+        query &= Q(title__icontains = word ) & Q( content__icontains = word )
 
     news = all_news.filter(query).distinct()
 
@@ -126,12 +126,12 @@ def news(req):
         if out:
             query = Q()
             for o in out:
-                query |= Q(id = o)
+                query &= Q(id = o)
             news = news.filter(query)
 
     if tags:
         matching_tags = PostTag.objects.filter(tag__in = tags)
-        news = all_news.filter(tags__in = matching_tags).distinct()
+        news = news.filter(tags__in = matching_tags).distinct()
 
 
 
