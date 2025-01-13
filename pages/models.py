@@ -52,7 +52,7 @@ class GalleryImage(models.Model):
         return f"gallery/{instance.created.year}/{instance.created.month}/{instance.gallery.id}/{filename}"
     image = models.FileField(upload_to = gallery_path)
     created = models.DateField(auto_now_add = True)
-    gallery = models.ForeignKey(Report, on_delete = models.CASCADE)
+    gallery = models.ForeignKey(Report, on_delete = models.CASCADE, related_name="gallery")
 
     def __str__(self):
         return f"{self.image.name}"
