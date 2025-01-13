@@ -118,14 +118,12 @@ def news(req):
     news = all_news.filter(query).distinct()
 
     if quotes:
-        out = []    
+        out = []
         for newspost in news:
             for quote in quotes:
-                if (quote in strip_tags(newspost.content)):
+                if (quote in strip_tags(newspost.content)) or quote in newspost.title:
                     out.append(newspost.id)
-
         if out:
-            print("in query")
             query = Q()
             for o in out:
                 query |= Q(id = o)
