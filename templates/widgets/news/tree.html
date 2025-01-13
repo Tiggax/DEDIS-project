@@ -7,6 +7,7 @@ hx-post="{% url 'api:news' %}?page={{ data.next_page_number }}"
 hx-trigger="intersect once"
 hx-swap="outerHTML"
 hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}", "search": {{search}} }'
+class="text-center"
 >
   <div class="spinner-border" role="status">
     <span class="sr-only"></span>
