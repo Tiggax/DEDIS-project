@@ -103,8 +103,8 @@ def news(req):
     tags = re.findall(tags_regex, search_term)
     key_vals = re.findall(key_val_regex, search_term)
     
-    words = [match[1] for match in w_a_q]
-    quotes = [match[0] for match in w_a_q]
+    words = [match[1] for match in w_a_q if match[1]]
+    quotes = [match[0] for match in w_a_q if match[0]]
     key_values = [(key, value or word) for key, value, word in key_vals]
 
 
