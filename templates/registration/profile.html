@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+<p>{{user.username}}</p>
+{% include "widgets/badges/rank.html" %}
+{% include "widgets/badges/permission.html" %}
+<p>{{user.email}}</p>
+
+
+<p>
+    Ime: 
+    <div 
+    hx-get="{% url 'accounts:update' 'first_name' user.id %}"
+    hx-target="this"
+    hx-swap="outerHTML"
+    hx-trigger="load"
+    ></div>
+</p>
+<p>
+    Priimek: 
+    <div 
+    hx-get="{% url 'accounts:update' 'last_name' user.id %}"
+    hx-target="this"
+    hx-swap="outerHTML"
+    hx-trigger="load"
+    ></div>
+</p>
+
+{% endblock content %}

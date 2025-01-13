@@ -1,0 +1,17 @@
+<div>
+    <span
+    class="
+    badge
+    bg-{% if user.rank == 'A' %}light
+    {% elif user.rank == 'J' %}secondary
+    {% elif user.rank == 'S' %}primary
+    {% elif user.rank == 'P' %}success
+    {% elif user.rank == 'I' %}warning
+    {% else %}danger
+    {% endif %}
+    "
+        >
+        {{user.get_rank_display}}
+    </span>
+
+</div>

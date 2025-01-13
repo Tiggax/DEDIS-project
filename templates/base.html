@@ -2,7 +2,7 @@
 {% load django_bootstrap5 %}
 
 <!DOCTYPE html>
-<html class="h-100" data-bs-theme="light">
+<html class="h-100" data-bs-theme="dark">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
         {% block header %}
         {% include "widgets/navbar.html" %}
         {% endblock header %}
-        <main class="flex-fill container">
+        <main class="flex-fill mx-5">
         {% block content %}
         default content
         {% endblock content %}

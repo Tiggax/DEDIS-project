@@ -2,15 +2,11 @@
 {% load static %}
 
 {% block content %}
-<div class="container col p-5 mt-5 card shadow w-50">
+<div class="container col p-5 mt-5 card shadow w-50 mb-5">
   <div class="row">
     <img class="mb-3" src="{% static 'images/textlogo.png' %}" alt="">
   <div>
+  {% include "widgets/forms/generic.html" with form=form submitname="Prijava" %}
 
-  <form method="post" class="">
-    {% csrf_token %}
-    <table class="table" >{{ form.as_table }}</table>
-    <button type="submit" class="btn btn-primary w-100">Prijava</button>
-  </form>
 </div>
 {% endblock content %}

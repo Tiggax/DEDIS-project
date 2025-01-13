@@ -1,30 +1,44 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="row">
+<div 
+class="row row-cols-2 p-2"
+>
+  
 
-  <div class="list-group col align-items-center">
-    <h3>
-      Search News
-      <span class="htmx-indicator spinner-border" role="status">
-          <span class="sr-only"></span>
-       </span>
-    </h3>
-    {% csrf_token %}
-    <input class="form-control" type="search"
-           name="search" placeholder="Begin Typing To Search News..."
-           hx-post="{% url 'api:news' %}"
-           hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
-           hx-target="#news--selection"
-           hx-indicator=".htmx-indicator"
-           hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}"}'
-    >
-    <div id="news--selection">
-      {% include "widgets/news/tree.html" with data=posts%}
+  <div 
+  class="col-4 row-cols-1 list-group align-items-center p-3"
+  style="max-height: 80vh;"
+>
+    <div class="row">
+      <h3>
+        Search News
+        <span class="htmx-indicator spinner-border" role="status">
+            <span class="sr-only"></span>
+        </span>
+      </h3>
+      <input class="form-control my-2" type="search"
+            name="search" placeholder="Begin Typing To Search News..."
+            hx-post="{% url 'api:news' %}"
+            hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+            hx-target="#news--selection"
+            hx-indicator=".htmx-indicator"
+            hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}"}'
+      >
+    </div>
+    <div class="h-75 overflow-scroll border rounded shadow">
+      <div class="row-cols-1  m-2 p-2" id="news--selection">
+      </div>
     </div>
   </div>
-  <div id="news--container" class="col">
-    {% include "widgets/news/post.html"  with data=default %}
+
+  <div 
+  class="col-8 text-break border rounded overflow-scroll h-75 p-3"
+  style="max-height: 80vh;"
+  id="news--container"
+  >
+    {% include "widgets/news/post.html" with data=default %}
   </div>
-  </div>
+
+</div>
 {% endblock content %}

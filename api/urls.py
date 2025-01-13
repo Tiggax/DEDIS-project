@@ -25,17 +25,19 @@ from . import views
 
 accounts = ([
     path('signup/', views.SignUpView.as_view(), name = "signup"),
-    path('update/', views.UpdateView.as_view(), name = "update"),
+    path('profile/', views.user_settings, name = "profile" ),
+    path('update/<str:field>/<uuid:target_user_id>', views.update_user, name = "update"),
     path('password/', views.UpdatePassword.as_view(), name="password"),
     path("", include("django.contrib.auth.urls")),
+    path("", views.list_accounts, name = ""),
 ], "accounts")
 
 apis = ([
-    path('', views.index),
     path('render/<str:object>/<uuid:id>/<path:template>', views.render_template, name="render"),
     path('comments/<uuid:id>', views.comments, name="comments"),
     path('comment/<uuid:id>', views.post_comment, name="post_comment"),
     path('news', views.news, name="news"),
+    path('reports', views.reports, name="reports"),
 ], "api")
 
 
@@ -45,7 +47,7 @@ urlpatterns = [
     path('api/', include(apis)),
     path('api/summernote/', include('django_summernote.urls')), # manual move out of "api:..."
     path('accounts/',include(accounts)),
-    path('', include("pages.urls"))
+    path('', include("pages.urls")),
 ]
 
 if settings.DEBUG:

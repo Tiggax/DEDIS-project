@@ -26,6 +26,11 @@ class Route(models.Model):
     def __str__(self):
         return f"{self.mountain} - {self.name}"
 
+class Tag(models.Model):
+    tag = models.CharField( max_length = 20)
+    def __str__(self):
+        return f"#{self.tag}"
+
 class Report(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length = 100)
@@ -37,6 +42,7 @@ class Report(models.Model):
         related_name="reports"
     )
     route = models.ForeignKey(Route, on_delete = models.CASCADE)
+    tags = models.ManyToManyField(Tag, blank=True, related_name="report_tags")
 
     def __str__(self):
         return f"{self.title}-{self.created}"
@@ -46,7 +52,7 @@ class GalleryImage(models.Model):
         return f"gallery/{instance.created.year}/{instance.created.month}/{instance.gallery.id}/{filename}"
     image = models.FileField(upload_to = gallery_path)
     created = models.DateField(auto_now_add = True)
-    gallery = models.ForeignKey(Report, on_delete = models.CASCADE)
+    gallery = models.ForeignKey(Report, on_delete = models.CASCADE, related_name="gallery")
 
     def __str__(self):
         return f"{self.image.name}"
@@ -64,11 +70,6 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.creator.username}: {self.created}"
 
-class PostTag(models.Model):
-    tag = models.CharField( max_length = 20)
-    def __str__(self):
-        return f"#{self.tag}"
-
 class NewsPost(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created = models.DateTimeField(auto_now_add = True)
@@ -79,7 +80,7 @@ class NewsPost(models.Model):
         on_delete = models.CASCADE,
         related_name="posts"
     )
-    tags = models.ManyToManyField(PostTag, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True, related_name="post_tags")
     
     def __str__(self):
         return f"{self.title}"

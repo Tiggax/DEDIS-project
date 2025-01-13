@@ -1,9 +1,9 @@
-{% for post in data %}
-  {% include "widgets/news/card.html" with data=post %}
+{% for report in data %}
+  {% include "widgets/report/card.html" with data=report %}
 {% endfor %}
 {% if data.next_page_number <= data.paginator.num_pages %}
 <div
-hx-post="{% url 'api:news' %}?page={{ data.next_page_number }}"
+hx-post="{% url 'api:reports' %}?page={{ data.next_page_number }}"
 hx-trigger="intersect once"
 hx-swap="outerHTML"
 hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}", "search": {{search}} }'
