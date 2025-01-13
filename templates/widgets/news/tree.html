@@ -4,7 +4,7 @@
 {% if data.next_page_number <= data.paginator.num_pages %}
 <div
 hx-post="{% url 'api:news' %}?page={{ data.next_page_number }}"
-hx-trigger="revealed"
+hx-trigger="intersect once"
 hx-swap="outerHTML"
 hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}", "search": {{search}} }'
 >

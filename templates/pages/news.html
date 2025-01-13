@@ -1,30 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="row">
-
-  <div class="list-group col align-items-center">
-    <h3>
-      Search News
-      <span class="htmx-indicator spinner-border" role="status">
-          <span class="sr-only"></span>
-       </span>
-    </h3>
-    {% csrf_token %}
-    <input class="form-control" type="search"
-           name="search" placeholder="Begin Typing To Search News..."
-           hx-post="{% url 'api:news' %}"
-           hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
-           hx-target="#news--selection"
-           hx-indicator=".htmx-indicator"
-           hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}"}'
-    >
-    <div id="news--selection">
+<div container>
+<div class="row row-cols-2 p-2">
+  
+  <div class="col-4 row-cols-1 list-group align-items-center overflow-scroll">
+    <div class="row">
+      <h3>
+        Search News
+        <span class="htmx-indicator spinner-border" role="status">
+            <span class="sr-only"></span>
+        </span>
+      </h3>
+      {% csrf_token %}
+      <input class="form-control my-2" type="search"
+            name="search" placeholder="Begin Typing To Search News..."
+            hx-post="{% url 'api:news' %}"
+            hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+            hx-target="#news--selection"
+            hx-indicator=".htmx-indicator"
+            hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}"}'
+      >
+    </div>
+    
+    <div class="row-cols-1" id="news--selection">
       {% include "widgets/news/tree.html" with data=posts%}
     </div>
   </div>
-  <div id="news--container" class="col">
-    {% include "widgets/news/post.html"  with data=default %}
+
+  <div class="col-8 text-break border rounded" id="news--container">
+    {% include "widgets/news/post.html" with data=default %}
   </div>
-  </div>
+
+</div>
+</div>
 {% endblock content %}
