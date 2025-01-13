@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="d-flex p-3 m-5 border shadow card">
     {% include "widgets/report/post.html" with data=report%}
 
     {% include "widgets/gallery/tree.html" with data=gallery %}
-
+    </div>
     <div
     id="comments-list"
     hx-get="{% url 'api:comments' report.id %}" 
