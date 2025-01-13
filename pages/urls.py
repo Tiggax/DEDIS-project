@@ -9,5 +9,5 @@ urlpatterns = [
     path("news", views.news, name="news"),
     path("news/<uuid:id>", views.news_page, name = "news_page"),
     path("reports", views.reports, name="reports"),
-    path("report/<uuid:id>", views.report, name="report"),
+    path("reports/<uuid:id>", views.report, name="report"),
 ]

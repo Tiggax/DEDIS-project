@@ -1,5 +1,5 @@
-{% for post in data %}
-  {% include "widgets/report/card.html" with data=post %}
+{% for report in data %}
+  {% include "widgets/report/card.html" with data=report %}
 {% endfor %}
 {% if data.next_page_number <= data.paginator.num_pages %}
 <div

@@ -35,19 +35,14 @@ def logged_in_user_page(req):
 
 def reports(req):
     ctx = {}
-    reports = Report.objects.order_by("created")
-    page_length = req.GET.get("page_count")
-    paginator = Paginator(reports, page_length if page_length else 25)
-    page_number = req.GET.get("page")
-    ctx["reports"] = paginator.get_page(page_number)
+    reports = Report.objects.order_by("created").reverse()
+    ctx["default"] = reports.first()
     return render(req, "pages/reports.html", ctx)
 
 def report(req, id):
     ctx = {}
     report = get_object_or_404(Report, id=id)
-    ctx["report"] = report
-    ctx["comments"] = report.comments.all()
-    ctx["gallery"] = report.galleryimage_set.all()
+    ctx["default"] = report
     return render(req, "pages/report.html", ctx)
 
 # News

@@ -2,7 +2,25 @@
     <h2>{{ data.title }}</h2>
     <p class="card-text">{{data.content|safe}}</p>
     <div class="row">
-    <p class="text-body-secondary col">{{data.creator}}</p>
-    <p class="text-body-secondary col text-end">{{data.created}}</p>
+        <p class="text-body-secondary col">{{data.creator}}</p>
+        <p class="text-body-secondary col text-end">{{data.created}}</p>
+    </div>
+
+    {% include "widgets/gallery/tree.html" with data=data.gallery.all %}
+    <div
+    id="comments-list"
+    hx-get="{% url 'api:comments' data.id %}" 
+    hx-swap="innerHTML" 
+    hx-target="#comments"
+    hx-swap-oob="true"
+    hx-trigger="load, from:#new_comment"
+    >
+        <div id="comments">
+            <div class="spinner-border" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+        <div hx-get="{% url 'api:post_comment' data.id %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"></div>
+
     </div>
 </div>

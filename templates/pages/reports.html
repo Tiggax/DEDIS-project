@@ -27,7 +27,6 @@ class="row row-cols-2 p-2"
     </div>
     <div class="h-75 overflow-scroll border rounded shadow">
       <div class="row-cols-1  m-2 p-2" id="report--selection">
-        {% include "widgets/report/tree.html" with data=posts%}
       </div>
     </div>
   </div>
@@ -42,14 +41,3 @@ class="row row-cols-2 p-2"
 
 </div>
 {% endblock content %}
-
-{% comment %} {% extends "base.html" %}
-{% load static %}
-{% block content %}
-<div class="list-group row align-items-center">
-    {% for report in reports %}
-    {% include "widgets/report/card.html" with data=report %}
-    {% endfor %}
-    {% include "widgets/paginator.html" with paginator=reports %}
-</div>
-{% endblock content%} {% endcomment %}

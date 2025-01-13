@@ -287,7 +287,7 @@ def reports(req):
             case _:
                 pass
 
-    reports = reports.distinct().order_by("created")
+    reports = reports.distinct().order_by("created").reverse()
     page_length = req.GET.get("page_count")
     paginator = Paginator(reports, page_length if page_length else 10)
     page_number = req.GET.get("page")
