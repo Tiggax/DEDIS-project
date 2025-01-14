@@ -12,10 +12,18 @@ class="row row-cols-2 p-2"
 >
     <div class="row">
       <h3>
-        Search News
+        Išči Novice
         <span class="htmx-indicator spinner-border" role="status">
             <span class="sr-only"></span>
         </span>
+        {% if user.permission == "M" %}
+        <p>
+          ali <a 
+          href="{% url 'pages:reports:create' %}"
+          class = "btn border rounded btn-success"
+          >Ustvari Novo</a>
+        </p>
+        {% endif %}
       </h3>
       <input class="form-control my-2" type="search"
             name="search" placeholder="Begin Typing To Search News..."

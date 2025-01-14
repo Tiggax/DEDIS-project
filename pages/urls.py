@@ -12,6 +12,7 @@ reports = ([
 news = ([
     path("", views.news, name="all"),
     path("<uuid:id>", views.news_page, name = "get"),
+    path("create", views.newspost_form, name = "create")
 ], "news")
 
 urlpatterns = [

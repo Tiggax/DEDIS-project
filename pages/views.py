@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import NewsPost, Report
 from django.shortcuts import render, redirect, get_object_or_404
 
-from pages.forms import ReportForm
+from pages.forms import ReportForm, NewsPostForm
 
 # Create your views here.
 
@@ -64,3 +64,19 @@ def news_page(req, id):
     ctx = {}
     ctx["default"] = get_object_or_404(NewsPost, id = id)
     return render(req, "pages/news.html", ctx)
+
+@login_required
+def newspost_form(req):
+    ctx = {}
+    ctx["form"] = NewsPostForm()
+    if req.method == "GET":
+        return render(req, "pages/new_news.html", ctx)
+    form = NewsPostForm(req.POST)
+    if form.is_valid():
+        news_post = form.save(commit=False)
+        news_post.author = req.user
+        news_post.save()
+        return redirect("pages:news:get", id = news_post.id )
+    
+    ctx["form"] = form
+    return render(req, "pages/new_news.html", ctx)
