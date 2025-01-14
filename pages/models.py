@@ -36,7 +36,7 @@ class Report(models.Model):
     title = models.CharField(max_length = 100)
     created = models.DateTimeField(auto_now_add = True)
     content = models.TextField()
-    creator = models.ForeignKey(
+    author = models.ForeignKey(
         ClimbUser, 
         on_delete = models.CASCADE,
         related_name="reports"
