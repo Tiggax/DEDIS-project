@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from .models import NewsPost, Report, Comment
+from .models import NewsPost, Report
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
-from django.core.paginator import Paginator
 
 from pages.forms import ReportForm
 
