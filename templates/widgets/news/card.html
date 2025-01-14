@@ -4,9 +4,13 @@
     hx-target="#news--container"
     hx-swap="innerHTML"
     hx-replace-url="{% url 'pages:news:get' data.id %}"
-    class="btn btn-secondary text-start my-2"
->
-    <p><strong>{{data.title}}</strong><p>
-    <small>{{data.content | safe | truncatechars_html:42}}</small>
+    class="btn btn-primary text-start my-2 card text-info-emphasis"
+    >
+    <div class="card-header">
+        <strong>{{data.title}}</strong>
+        <small>{{data.author}}</small>
+    </div>
+    <div class="card-body">
+        <small>{{data.content | safe | truncatechars_html:42}}</small>
+    </div>
 </div>
-
