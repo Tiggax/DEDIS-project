@@ -9,21 +9,33 @@
     </div>
 
     {% include "widgets/gallery/tree.html" with data=data.gallery.all %}
+
     <div
-    id="comments-list"
-    hx-get="{% url 'api:comments' data.id %}" 
-    hx-swap="innerHTML" 
-    hx-target="#comments"
-    hx-trigger="load, from:#new_comment"
+    id="comments-section"
     >
-    <div id="comments">
-        <div class="spinner-border" role="status">
+        <div
+        id="comments"
+        hx-get="{% url 'api:comments' data.id %}" 
+        hx-swap="innerHTML" 
+        hx-target="#comments"
+        hx-trigger="load, submit from:#post-comment"
+        >
+            <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+            </div>
+        </div>
+        <div 
+        id="post-comment"
+        hx-get="{% url 'api:post_comment' data.id %}" 
+        hx-trigger="load, submit" 
+        hx-target="this" 
+        hx-swap="innerHTML"
+        >
+            <div class="spinner-border" role="status">
                 <span class="sr-only"></span>
             </div>
         </div>
     </div>
-    <div hx-get="{% url 'api:post_comment' data.id %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"></div>
-</div>
 {% endblock content %}
 
 {% block p %}

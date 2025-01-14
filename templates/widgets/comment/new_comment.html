@@ -1,20 +1,19 @@
 {% if user.is_authenticated %}
-<div class="shadow p-4 m-5 col" id="new_comment">
-    <form 
-    hx-post="{% url 'api:post_comment' id %}" 
-    hx-trigger="submit"
-    hx-target="this"
-    hx-on::after-request="if(event.detail.successful) document.getElementById('note-input').value = ''"
-    >
-        {% csrf_token %}
-        {{form}}
-        <button
-        id="comment-submit"
-        type="submit"
-        class="btn btn-primary"
-        >Post</button>
-    </form>
-</div>
+<form 
+hx-post="{% url 'api:post_comment' id %}" 
+hx-trigger="submit"
+hx-target="this"
+hx-swap="outerHTML"
+hx-on::after-request="if(event.detail.successful) document.getElementById('note-input').value = ''"
+>
+    {% csrf_token %}
+    {{form}}
+    <button
+    id="comment-submit"
+    type="submit"
+    class="btn btn-primary"
+    >Post</button>
+</form>
 {% else %}
 <p>You need to be loged in to post comments!</p>
 <p>Log in or sign up here:</p>
@@ -23,5 +22,4 @@
     <div class="p-1"></div>
     <a class="btn btn-primary" href="{% url 'accounts:signup' %}">Sign up</a>
   </div>
-
 {% endif %}
