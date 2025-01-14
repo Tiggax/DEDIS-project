@@ -58,6 +58,7 @@ def report_form(req):
     ctx["form"] = form
     return render(req, "pages/reportForm.html", ctx)
 
+@login_required
 def edit_report(req, id):
     ctx = {}
     report = get_object_or_404(Report, id = id)
@@ -115,6 +116,7 @@ def newspost_form(req):
     ctx["form"] = form
     return render(req, "pages/newsPostForm.html", ctx)
 
+@login_required
 def edit_newspost(req, id):
     ctx = {}
     news_post = get_object_or_404(NewsPost, id = id)
