@@ -1,6 +1,9 @@
 {% extends "wrappers/404.html" %}
 {% block content %}
 <div class="">
+    {% if data.author == user %}
+    <a href="{% url 'pages:reports:edit' data.id %}">Edit?</a>
+    {% endif %}
     <h2>{{ data.title }}</h2>
     <p class="card-text">{{data.content|safe}}</p>
     <div class="row">

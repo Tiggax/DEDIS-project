@@ -58,6 +58,28 @@ def report_form(req):
     ctx["form"] = form
     return render(req, "pages/reportForm.html", ctx)
 
+def edit_report(req, id):
+    ctx = {}
+    report = get_object_or_404(Report, id = id)
+    if (not req.user.permission in ["M"]) and req.user != report.author:
+        ctx["content"] = """
+        <p>Nimate pravic za spreminjanje tega Poročila. Če menite da je to napaka kontaktirajte osebje.</p>
+        """
+        return render(req, "pages/blank.html", ctx)
+    ctx["form"] = ReportForm(instance=report)
+    if req.method == "GET":
+        return render(req, "pages/reportForm.html", ctx)
+    
+    form = ReportForm(req.POST, instance=report)
+
+    if form.is_valid():
+        report = form.save(commit=False)
+        report.author = req.user
+        report.save()
+        return redirect("pages:reports:get", id = report.id )
+
+    return render(req, "pages/reportForm.html", ctx)
+
 # News
 
 def news(req):
@@ -91,4 +113,27 @@ def newspost_form(req):
         return redirect("pages:news:get", id = news_post.id )
     
     ctx["form"] = form
+    return render(req, "pages/newsPostForm.html", ctx)
+
+def edit_newspost(req, id):
+    ctx = {}
+    news_post = get_object_or_404(NewsPost, id = id)
+    if (not req.user.permission in ["M"]) and req.user != news_page.author:
+        ctx["content"] = """
+        <p>Nimate pravic za spreminjanje te novice. Če menite da je to napaka kontaktirajte osebje.</p>
+        """
+        return render(req, "pages/blank.html", ctx)
+    
+    ctx["form"] = NewsPostForm(instance= news_post)
+    if req.method == "GET":
+        return render(req, "pages/NewsPostForm.html", ctx)
+    
+    form = NewsPostForm(req.POST, instance=news_post)
+
+    if form.is_valid():
+        news_post = form.save(commit=False)
+        news_post.author = req.user
+        news_post.save()
+        return redirect("pages:news:get", id = news_post.id )
+
     return render(req, "pages/newsPostForm.html", ctx)
