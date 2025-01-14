@@ -47,7 +47,7 @@ def report_form(req):
     
     ctx["form"] = ReportForm()
     if req.method == "GET":
-        return render(req, "pages/new_report.html", ctx)
+        return render(req, "pages/reportForm.html", ctx)
     form = ReportForm(req.POST)
     if form.is_valid():
         report = form.save(commit=False)
@@ -56,7 +56,7 @@ def report_form(req):
         return redirect("pages:reports:get", id = report.id )
     
     ctx["form"] = form
-    return render(req, "pages/new_report.html", ctx)
+    return render(req, "pages/reportForm.html", ctx)
 
 # News
 
@@ -82,7 +82,7 @@ def newspost_form(req):
         
     ctx["form"] = NewsPostForm()
     if req.method == "GET":
-        return render(req, "pages/new_news.html", ctx)
+        return render(req, "pages/newsPostForm.html", ctx)
     form = NewsPostForm(req.POST)
     if form.is_valid():
         news_post = form.save(commit=False)
@@ -91,4 +91,4 @@ def newspost_form(req):
         return redirect("pages:news:get", id = news_post.id )
     
     ctx["form"] = form
-    return render(req, "pages/new_news.html", ctx)
+    return render(req, "pages/newsPostForm.html", ctx)
