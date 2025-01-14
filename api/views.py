@@ -103,7 +103,9 @@ def update_user(req, field, target_user_id):
     
     target_user.save()
     
-    return render(req, field_widget, ctx)
+    res = render(req, field_widget, ctx)
+    res["HX-Trigger-After-Swap"] = "pageUpdate"
+    return res
 
 class UpdatePassword(PasswordChangeView):
     form_class = PasswordChangeForm
@@ -130,7 +132,9 @@ def render_template(req, object, id, template):
         case _:
             pass
     print("request: {template} with {}", ctx["data"])
-    return render(req, template, ctx)
+    res = render(req, template, ctx)
+    res['HX-Trigger-After-Settle'] = "pageUpdate"
+    return res
 
 # Comments
 

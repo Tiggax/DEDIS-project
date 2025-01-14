@@ -15,8 +15,8 @@
         <div 
         hx-get="{% url 'accounts:update' 'first_name' data.id %}"
         hx-target="this"
-        hx-swap="outerHTML"
-        hx-trigger="load"
+        hx-swap="innerHTML"
+        hx-trigger="load, pageUpdate from:body"
         ></div>
     </p>
 
@@ -24,8 +24,8 @@
       <div 
       hx-get="{% url 'accounts:update' 'rank' data.id %}"
       hx-target="this"
-      hx-swap="outerHTML"
-      hx-trigger="load"
+      hx-swap="innerHTML"
+      hx-trigger="load, pageUpdate from:body"
       >
       </div>
     </p>
@@ -34,8 +34,8 @@
       <div 
       hx-get="{% url 'accounts:update' 'permission' data.id %}"
       hx-target="this"
-      hx-swap="outerHTML"
-      hx-trigger="load"
+      hx-swap="innerHTML"
+      hx-trigger="load, pageUpdate from:body"
       ></div>
   </p>
     </div>
