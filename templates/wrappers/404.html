@@ -1,0 +1,9 @@
+{% if data %}
+{% block content %}
+{% endblock content %}
+{% else %}
+{% block error %}
+<h1>{% block h %}404 Napaka{% endblock h %}</h1>
+<p>{% block p %}Ta Novica ni bila najdena ali ni na voljo{% endblock p %}</p>
+{% endblock error %}
+{% endif %}

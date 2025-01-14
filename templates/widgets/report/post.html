@@ -1,3 +1,5 @@
+{% extends "wrappers/404.html" %}
+{% block content %}
 <div class="">
     <h2>{{ data.title }}</h2>
     <p class="card-text">{{data.content|safe}}</p>
@@ -15,12 +17,17 @@
     hx-swap-oob="true"
     hx-trigger="load, from:#new_comment"
     >
-        <div id="comments">
-            <div class="spinner-border" role="status">
+    <div id="comments">
+        <div class="spinner-border" role="status">
                 <span class="sr-only"></span>
             </div>
         </div>
         <div hx-get="{% url 'api:post_comment' data.id %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"></div>
-
+        
     </div>
 </div>
+{% endblock content %}
+
+{% block p %}
+Ta Poročilo ni bil najden ali ni na voljo
+{% endblock p %}
