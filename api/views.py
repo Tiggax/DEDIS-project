@@ -91,17 +91,17 @@ def update_user(req, field, target_user_id):
     
     match field:
         case "first_name":
-            user.first_name = data[field]
+            target_user.first_name = data[field]
         case "last_name":
-            user.last_name = data[field]
+            target_user.last_name = data[field]
         case "rank":
-            user.rank = data[field]
+            target_user.rank = data[field]
         case "permission":
-            user.permission = data[field]
+            target_user.permission = data[field]
         case _:
             pass
     
-    user.save()
+    target_user.save()
     
     return render(req, field_widget, ctx)
 
