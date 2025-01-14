@@ -39,6 +39,12 @@ def report(req, id):
 @login_required
 def report_form(req):
     ctx = {}
+    if not req.user.permission in ["A", "M"]:
+        ctx["content"] = """
+        <p>Nimate pravic za ustvarjanje Poročil. Če menite da je to napaka kontaktirajte osebje.</p>
+        """
+        return render(req, "pages/blank.html", ctx)
+    
     ctx["form"] = ReportForm()
     if req.method == "GET":
         return render(req, "pages/new_report.html", ctx)
@@ -68,6 +74,12 @@ def news_page(req, id):
 @login_required
 def newspost_form(req):
     ctx = {}
+    if not req.user.permission in ["M"]:
+        ctx["content"] = """
+        <p>Nimate pravic za ustvarjanje novic. Če menite da je to napaka kontaktirajte osebje.</p>
+        """
+        return render(req, "pages/blank.html", ctx)
+        
     ctx["form"] = NewsPostForm()
     if req.method == "GET":
         return render(req, "pages/new_news.html", ctx)
