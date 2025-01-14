@@ -17,7 +17,7 @@
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Domov</a>
               </li>
               <li class="nav-item">
-                {% url 'pages:reports' as link %}
+                {% url 'pages:reports:all' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Poročila</a>
               </li>
               <li class="nav-item">

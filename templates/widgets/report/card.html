@@ -3,7 +3,7 @@
     hx-get="{% url 'api:render' 'Report' data.id 'widgets/report/post.html' %}"
     hx-target="#report--container"
     hx-swap="innerHTML"
-    hx-replace-url="{% url 'pages:report' data.id %}"
+    hx-replace-url="{% url 'pages:reports:get' data.id %}"
     class="btn btn-primary text-start my-2"
 >
     <p><strong>{{data.title}}</strong><p>
