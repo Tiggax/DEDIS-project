@@ -11,9 +11,9 @@ from pages.forms import ReportForm, NewsPostForm
 def index(req):
     ctx = {}
     ctx["content"] = "pages index"
-    news = NewsPost.objects.order_by("created")
+    news = NewsPost.objects.order_by("created").reverse()
     ctx["news_post"] = news.first()
-    news = Report.objects.order_by("created")
+    news = Report.objects.order_by("created").reverse()
     ctx["report"] = news.first()
     return render(req, "pages/home.html", ctx)
 
