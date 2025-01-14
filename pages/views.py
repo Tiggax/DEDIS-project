@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.core.paginator import Paginator
 
+from pages.forms import ReportForm
 
 # Create your views here.
 
@@ -36,6 +37,22 @@ def report(req, id):
     report = get_object_or_404(Report, id=id)
     ctx["default"] = report
     return render(req, "pages/reports.html", ctx)
+
+@login_required
+def report_form(req):
+    ctx = {}
+    ctx["form"] = ReportForm()
+    if req.method == "GET":
+        return render(req, "pages/new_report.html", ctx)
+    form = ReportForm(req.POST)
+    if form.is_valid():
+        report = form.save(commit=False)
+        report.author = req.user
+        report.save()
+        return redirect("pages:reports:get", id = report.id )
+    
+    ctx["form"] = form
+    return render(req, "pages/new_report.html", ctx)
 
 # News
 

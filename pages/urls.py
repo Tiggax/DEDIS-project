@@ -6,6 +6,7 @@ app_name = "pages"
 reports =([
     path("", views.reports, name="all"),
     path("<uuid:id>", views.report, name="get"),
+    path("create", views.report_form, name="create")
 ], "reports")
 
 urlpatterns = [

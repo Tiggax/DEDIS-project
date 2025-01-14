@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="p-5">
+    {% include "widgets/forms/generic.html" with form=form  submitname="Ustvari" %}
+</div>
+
+{% endblock content %}
