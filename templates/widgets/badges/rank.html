@@ -2,11 +2,11 @@
     <span
     class="
     badge
-    bg-{% if user.rank == 'A' %}light
+    bg-{% if user.rank == 'A' %}light text-dark
     {% elif user.rank == 'J' %}secondary
     {% elif user.rank == 'S' %}primary
     {% elif user.rank == 'P' %}success
-    {% elif user.rank == 'I' %}warning
+    {% elif user.rank == 'I' %}warning text-dark
     {% else %}danger
     {% endif %}
     "

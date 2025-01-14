@@ -36,12 +36,12 @@
               {% endif %}
           </div>
           {% if user.is_authenticated %}
-          <div class="d-flex mx-4">
-            Hello,
-            {{user.username}}
-          </div>
+          {% comment %} <div class="d-flex mx-2">
+            
+          </div> {% endcomment %}
+          {% include "widgets/badges/user.html" %}
           <div class="d-flex" role="button">
-            <a class="btn btn-primary" href="{% url 'accounts:profile' %}">My profile</a>
+            <a class="btn btn-primary" href="{% url 'accounts:profile' %}">{{user.username}}</a>
             <div class="p-1"></div>
             <form action="{% url 'accounts:logout' %}" method="post" >
               {% csrf_token %}
