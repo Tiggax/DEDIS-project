@@ -60,7 +60,7 @@ class GalleryImage(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
-    creator = models.ForeignKey(
+    author = models.ForeignKey(
         ClimbUser, 
         on_delete = models.CASCADE,
         related_name="comments"
@@ -68,7 +68,7 @@ class Comment(models.Model):
     report_id = models.ForeignKey(Report, on_delete = models.CASCADE, related_name="comments")
 
     def __str__(self):
-        return f"{self.creator.username}: {self.created}"
+        return f"{self.author.username}: {self.created}"
 
 class NewsPost(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

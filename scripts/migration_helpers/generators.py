@@ -12,7 +12,7 @@ def reports(author, route, count = 50):
         r = Report()
         r.title = f"Report title {i}"
         r.content = "content"
-        r.creator = author
+        r.author = author
         r.route = route
         r.save()
 
@@ -30,7 +30,7 @@ def populate_comments(author, per_report = 5):
     for report in reports:
         for i in range(per_report):
             c = Comment()
-            c.creator = author
+            c.author = author
             c.content = f"content {i}"
             c.report_id = report
             c.save()

@@ -158,7 +158,7 @@ def post_comment(req, id):
             data = form.cleaned_data
             c = Comment()
             c.content = data["content"]
-            c.creator = req.user
+            c.author = req.user
             c.report_id = report
             c.save()
     else:
