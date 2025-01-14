@@ -11,8 +11,14 @@ class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
         fields = ["title", "content", "route", "tags"]
+        widgets = {
+            "content" : SummernoteWidget(),
+        }
 
 class NewsPostForm(forms.ModelForm):
     class Meta:
         model = NewsPost
         fields = ["title", "content", "tags"]
+        widgets = {
+            "content" : SummernoteWidget(),
+        }
