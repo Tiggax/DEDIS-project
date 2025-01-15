@@ -1,6 +1,9 @@
 {% extends "wrappers/404.html" %}
 
 {% block content %}
+    {% if data.author == user %}
+        <a href="{% url 'pages:news:edit' data.id %}" class="btn btn-warning">Edit?</a>
+    {% endif %}
     <h1>{{data.title}}</h1>
     <p><b>{{data.author}}</b></p>
     <p><b>{{data.created}}</b></p>

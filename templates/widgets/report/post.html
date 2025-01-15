@@ -2,7 +2,7 @@
 {% block content %}
 <div class="">
     {% if data.author == user %}
-    <a href="{% url 'pages:reports:edit' data.id %}">Edit?</a>
+    <a class="btn btn-warning" href="{% url 'pages:reports:edit' data.id %}">Edit?</a>
     {% endif %}
     <h2>{{ data.title }}</h2>
     <p><strong>{{data.route}}</strong></p>
