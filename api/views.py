@@ -318,7 +318,7 @@ def news(req):
 
     news = news.distinct().order_by("created").reverse()
     page_length = req.GET.get("page_count")
-    paginator = Paginator(news, page_length if page_length else 10)
+    paginator = Paginator(news, page_length if page_length else 5)
     page_number = req.GET.get("page")
     ctx["data"] =  paginator.get_page(page_number)
     ctx["search"] = json.dumps(search_term)
@@ -387,8 +387,16 @@ def reports(req):
 
     reports = reports.distinct().order_by("created").reverse()
     page_length = req.GET.get("page_count")
-    paginator = Paginator(reports, page_length if page_length else 10)
+    paginator = Paginator(reports, page_length if page_length else 5)
     page_number = req.GET.get("page")
     ctx["data"] =  paginator.get_page(page_number)
     ctx["search"] = json.dumps(search_term)
     return render(req, "widgets/report/tree.html", ctx)
+
+
+def add_image(req, id):
+    return HttpResponse("")
+
+def delete_galleryImage(req, id):
+
+    return HttpResponse("")
