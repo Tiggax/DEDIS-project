@@ -73,7 +73,7 @@ class Comment(models.Model):
 class NewsPost(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created = models.DateTimeField(auto_now_add = True)
-    title = models.TextField()
+    title = models.CharField(max_length = 100)
     content = models.TextField()
     author = models.ForeignKey(
         ClimbUser,
