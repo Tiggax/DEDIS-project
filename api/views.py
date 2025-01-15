@@ -373,6 +373,15 @@ def reports(req):
                     query |= Q(**{f"{field}__icontains": val})
                 users = ClimbUser.objects.filter(query)
                 reports |= all_reports.filter( author__in = users ).distinct()
+            case "route":
+                query = Q()
+                query |= Q(route__name__icontains = val)
+                reports |= all_reports.filter( query ).distinct()
+            case "mountain":
+                print(f"{key} - {val}")
+                query = Q()
+                query |= Q(route__mountain__name__icontains = val)
+                reports |= all_reports.filter( query ).distinct()
             case _:
                 pass
 
