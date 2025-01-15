@@ -1,0 +1,14 @@
+<form
+hx-post="{% url 'api:routes:new' %}"
+hx-trigger="submit"
+hx-target="#active-route-selector"
+hx-swap="outerHTML"
+hx-vals='{"mountain": "{{mountain.id}}"}'
+>
+    {% csrf_token %}
+    <p>Poti ni v imeniku? Ustvari novo pot za {{mountain}}:</p>
+    <p>
+        <input type="text" name="name" value="{{search}}">
+    </p>
+    <button type="submit" class="btn btn-primary">Nova</button>
+</form>

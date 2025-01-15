@@ -1,0 +1,13 @@
+<form
+hx-post="{% url 'api:mountains:new' %}"
+hx-trigger="submit"
+hx-target="#active-mountain-selector"
+hx-swap="outerHTML"
+>
+    {% csrf_token %}
+    <p>Gore ni v imeniku? ustvari novo:</p>
+    <p>
+        <input type="text" name="name" value="{{search}}">
+    </p>
+    <button type="submit" class="btn btn-primary">Nova</button>
+</form>

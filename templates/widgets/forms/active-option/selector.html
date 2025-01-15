@@ -1,0 +1,21 @@
+{% load static %}
+<script src="{% static 'htmx.min.js' %}"></script>
+
+<div id="active-{{type}}-selector">
+    <input
+    name="{{type}}-search"
+    placeholder="search..."
+    hx-post="{% url 'api:'|add:type|add:'s:search' %}"
+    hx-trigger="input changed delay:500ms, load, {{type}}Update"
+    hx-target="#{{type}}-selector"
+    hx-indicator="#active-{{type}}-selector .htmx-indicator"
+    hx-swap="innerHTML"
+    hx-vals='{"csrfmiddlewaretoken": "{{csrf_token}}"}'
+    value="{{search}}"
+    />
+    <span class="htmx-indicator spinner-border" role="status">
+        <span class="sr-only"></span>
+    </span>
+    <div id="{{type}}-selector" name="selector">
+    </div>
+</div>

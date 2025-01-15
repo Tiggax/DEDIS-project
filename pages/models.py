@@ -36,7 +36,7 @@ class Report(models.Model):
     title = models.CharField(max_length = 100)
     created = models.DateTimeField(auto_now_add = True)
     content = models.TextField()
-    creator = models.ForeignKey(
+    author = models.ForeignKey(
         ClimbUser, 
         on_delete = models.CASCADE,
         related_name="reports"
@@ -50,8 +50,8 @@ class Report(models.Model):
 class GalleryImage(models.Model):
     def gallery_path(instance, filename):
         return f"gallery/{instance.created.year}/{instance.created.month}/{instance.gallery.id}/{filename}"
-    image = models.FileField(upload_to = gallery_path)
     created = models.DateField(auto_now_add = True)
+    image = models.FileField(upload_to = gallery_path)
     gallery = models.ForeignKey(Report, on_delete = models.CASCADE, related_name="gallery")
 
     def __str__(self):
@@ -60,7 +60,7 @@ class GalleryImage(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
-    creator = models.ForeignKey(
+    author = models.ForeignKey(
         ClimbUser, 
         on_delete = models.CASCADE,
         related_name="comments"
@@ -68,12 +68,12 @@ class Comment(models.Model):
     report_id = models.ForeignKey(Report, on_delete = models.CASCADE, related_name="comments")
 
     def __str__(self):
-        return f"{self.creator.username}: {self.created}"
+        return f"{self.author.username}: {self.created}"
 
 class NewsPost(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created = models.DateTimeField(auto_now_add = True)
-    title = models.TextField()
+    title = models.CharField(max_length = 100)
     content = models.TextField()
     author = models.ForeignKey(
         ClimbUser,

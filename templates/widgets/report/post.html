@@ -1,26 +1,49 @@
+{% extends "wrappers/404.html" %}
+{% block content %}
 <div class="">
+    {% if data.author == user %}
+    <a class="btn btn-warning" href="{% url 'pages:reports:edit' data.id %}">Edit?</a>
+    {% endif %}
     <h2>{{ data.title }}</h2>
+    <p><strong>{{data.route}}</strong></p>
     <p class="card-text">{{data.content|safe}}</p>
     <div class="row">
-        <p class="text-body-secondary col">{{data.creator}}</p>
+        <p class="text-body-secondary col">{{data.author}}{% include "widgets/badges/rank.html" with user=data.author %}</p>
         <p class="text-body-secondary col text-end">{{data.created}}</p>
     </div>
 
     {% include "widgets/gallery/tree.html" with data=data.gallery.all %}
+
     <div
-    id="comments-list"
-    hx-get="{% url 'api:comments' data.id %}" 
-    hx-swap="innerHTML" 
-    hx-target="#comments"
-    hx-swap-oob="true"
-    hx-trigger="load, from:#new_comment"
+    id="comments-section"
     >
-        <div id="comments">
+        <div
+        id="comments"
+        hx-get="{% url 'api:comments' data.id %}" 
+        hx-swap="innerHTML" 
+        hx-target="#comments"
+        hx-trigger="load, submit from:#post-comment"
+        >
+            <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+            </div>
+        </div>
+        <div 
+        id="post-comment"
+        hx-get="{% url 'api:post_comment' data.id %}" 
+        hx-trigger="load, submit" 
+        hx-target="this" 
+        hx-swap="innerHTML"
+        class="px-2"
+        >
             <div class="spinner-border" role="status">
                 <span class="sr-only"></span>
             </div>
         </div>
-        <div hx-get="{% url 'api:post_comment' data.id %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"></div>
-
     </div>
 </div>
+{% endblock content %}
+
+{% block p %}
+Ta Poročilo ni bil najden ali ni na voljo
+{% endblock p %}

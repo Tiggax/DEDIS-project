@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="p-5">
+    <form method="post" class="container">
+        {% csrf_token %}
+        <p>
+            <label>Naslov: </label>
+            {{form.title}}
+        </p>
+        <p>
+            {{form.content}}
+        </p>
+        <p>
+            <div class="row">
+                <div class="col border rounded p-4">
+                    {% include "widgets/forms/active-option/selector.html" with url='api:mountains:search' type="mountain" search=default.route.mountain %}
+                </div>
+                <div 
+                class="col border rounded p-4"
+                hx-get="{% url 'api:routes:search' %}"
+                hx-trigger="click from:#active-mountain-selector, load delay:200ms"
+                hx-target="this"
+                hx-swap="innerHTML"
+                >
+                    {% include "widgets/forms/active-option/selector.html" with url='api:routes:search' type="route" search=default.route %}
+                </div>
+            </div>
+           
+        </p>
+
+        <button type="submit" class="btn btn-primary w-100">Ustvari</button>
+    </form>
+</div>
+
+{% endblock content %}

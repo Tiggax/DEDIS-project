@@ -17,18 +17,18 @@
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Domov</a>
               </li>
               <li class="nav-item">
-                {% url 'pages:reports' as link %}
+                {% url 'pages:reports:all' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Poročila</a>
               </li>
               <li class="nav-item">
-                {% url 'pages:news' as link %}
+                {% url 'pages:news:all' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Novice</a>
               </li>
               <li class="nav-item">
                 {% url 'pages:about_us' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">O nas</a> 
               </li>
-              {% if user.permission != "U" %}
+              {% if user.permission != "U" and user.is_authenticated %}
               <li class="nav-item">
                 {% url 'accounts:' as link %}
                 <a class="nav-link {% if request.path == link %}active{% endif %}" href="{{link}}">Uporabniki</a> 
@@ -36,12 +36,12 @@
               {% endif %}
           </div>
           {% if user.is_authenticated %}
-          <div class="d-flex mx-4">
-            Hello,
-            {{user.username}}
-          </div>
+          {% comment %} <div class="d-flex mx-2">
+            
+          </div> {% endcomment %}
+          {% include "widgets/badges/user.html" %}
           <div class="d-flex" role="button">
-            <a class="btn btn-primary" href="{% url 'accounts:profile' %}">My profile</a>
+            <a class="btn btn-primary" href="{% url 'accounts:profile' %}">{{user.username}}</a>
             <div class="p-1"></div>
             <form action="{% url 'accounts:logout' %}" method="post" >
               {% csrf_token %}

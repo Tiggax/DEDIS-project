@@ -91,19 +91,21 @@ def update_user(req, field, target_user_id):
     
     match field:
         case "first_name":
-            user.first_name = data[field]
+            target_user.first_name = data[field]
         case "last_name":
-            user.last_name = data[field]
+            target_user.last_name = data[field]
         case "rank":
-            user.rank = data[field]
+            target_user.rank = data[field]
         case "permission":
-            user.permission = data[field]
+            target_user.permission = data[field]
         case _:
             pass
     
-    user.save()
+    target_user.save()
     
-    return render(req, field_widget, ctx)
+    res = render(req, field_widget, ctx)
+    res["HX-Trigger-After-Swap"] = "pageUpdate"
+    return res
 
 class UpdatePassword(PasswordChangeView):
     form_class = PasswordChangeForm
@@ -130,7 +132,9 @@ def render_template(req, object, id, template):
         case _:
             pass
     print("request: {template} with {}", ctx["data"])
-    return render(req, template, ctx)
+    res = render(req, template, ctx)
+    res['HX-Trigger-After-Settle'] = "pageUpdate"
+    return res
 
 # Comments
 
@@ -154,7 +158,7 @@ def post_comment(req, id):
             data = form.cleaned_data
             c = Comment()
             c.content = data["content"]
-            c.creator = req.user
+            c.author = req.user
             c.report_id = report
             c.save()
     else:
@@ -164,6 +168,99 @@ def post_comment(req, id):
     ctx["id"] = id
 
     return render(req, "widgets/comment/new_comment.html", ctx)
+
+# Route
+
+def mountains(req):
+    typ = "mountain"
+    ctx = {}
+
+    ctx["options"] = Mountain.objects.all()
+    ctx["type"] = typ
+
+    if req.method == "GET":
+        return render(req, "widgets/forms/active-option/selector.html", ctx)
+    
+    ctx["search"] = req.POST[typ +"-search"]
+    ctx["options"] = ctx["options"].filter(name__icontains = ctx["search"])
+
+    if not ctx["options"]:
+        res = render(req, "widgets/forms/mountain.html", ctx)
+        res["HX-Trigger"] = "routeUpdate"
+        return res
+
+    res = render(req, "widgets/forms/active-option/options.html", ctx)
+    res["HX-Trigger"] = "routeUpdate"
+    return res
+    
+
+def create_mountain(req):
+    ctx = {}
+    typ = "mountain"
+    ctx["type"] = typ
+    if req.method == "GET":
+        return HttpResponse("make post request with {name: value}")
+    
+    data = req.POST
+    ctx["search"] = data["name"]
+
+    if not "name" in data:
+        return HttpResponse("no name")
+    
+    mountain = Mountain()
+    mountain.name = data["name"]
+    mountain.save()
+    ctx["search"] = mountain.name
+    return render(req, "widgets/forms/active-option/selector.html", ctx)
+
+# routes
+
+def routes(req):
+    ctx = {}
+    typ = "route"
+    ctx["type"] = typ
+    ctx["options"] = Route.objects.all()
+
+    if req.method == "GET":
+        return render(req, "widgets/forms/active-option/selector.html", ctx)
+    
+    data = req.POST
+    ctx["search"] = data[typ +"-search"]
+
+    if not "mountain" in data:
+        return HttpResponse("please select a mountain")
+    
+    ctx["options"] = ctx["options"].filter(mountain__id = data["mountain"])
+
+    if not ctx["options"]:
+        gora = get_object_or_404(Mountain, id = data["mountain"])
+        ctx["mountain"] = gora
+        res = render(req, "widgets/forms/route.html", ctx)
+        return res
+    return render(req, "widgets/forms/active-option/options.html", ctx)
+
+def create_route(req):
+    ctx = {}
+    typ = "route"
+    ctx["type"] = typ
+    if req.method == "GET":
+        return HttpResponse("make post request with {name: value}")
+    
+    data = req.POST
+    ctx["search"] = data["name"]
+
+    if not "name" in data:
+        return HttpResponse("no name")
+    if not "mountain" in data:
+        return HttpResponse("no mountain")
+    
+    route = Route()
+    route.name = data["name"]
+    route.mountain = get_object_or_404(Mountain, id = data["mountain"])
+    route.save()
+    ctx["search"] = route.name
+    return render(req, "widgets/forms/active-option/selector.html", ctx)
+
 
 # News
 
@@ -221,7 +318,7 @@ def news(req):
 
     news = news.distinct().order_by("created").reverse()
     page_length = req.GET.get("page_count")
-    paginator = Paginator(news, page_length if page_length else 10)
+    paginator = Paginator(news, page_length if page_length else 5)
     page_number = req.GET.get("page")
     ctx["data"] =  paginator.get_page(page_number)
     ctx["search"] = json.dumps(search_term)
@@ -276,13 +373,30 @@ def reports(req):
                     query |= Q(**{f"{field}__icontains": val})
                 users = ClimbUser.objects.filter(query)
                 reports |= all_reports.filter( author__in = users ).distinct()
+            case "route":
+                query = Q()
+                query |= Q(route__name__icontains = val)
+                reports |= all_reports.filter( query ).distinct()
+            case "mountain":
+                print(f"{key} - {val}")
+                query = Q()
+                query |= Q(route__mountain__name__icontains = val)
+                reports |= all_reports.filter( query ).distinct()
             case _:
                 pass
 
     reports = reports.distinct().order_by("created").reverse()
     page_length = req.GET.get("page_count")
-    paginator = Paginator(reports, page_length if page_length else 10)
+    paginator = Paginator(reports, page_length if page_length else 5)
     page_number = req.GET.get("page")
     ctx["data"] =  paginator.get_page(page_number)
     ctx["search"] = json.dumps(search_term)
     return render(req, "widgets/report/tree.html", ctx)
+
+
+def add_image(req, id):
+    return HttpResponse("")
+
+def delete_galleryImage(req, id):
+
+    return HttpResponse("")
