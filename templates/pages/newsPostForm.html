@@ -2,8 +2,20 @@
 {% load static %}
 {% block content %}
 
-<div class="p-5">
-    {% include "widgets/forms/generic.html" with form=form  submitname="Ustvari" %}
-</div>
+<form method="post" class="container">
+    {% csrf_token %}
+    <div class="p-5">
+        {% include "widgets/forms/generic.html" with form=form  submitname="Ustvari" %}
+
+        <p>
+            <label>Naslov: </label>
+            {{form.title}}
+        </p>
+        <p>
+            {{form.content}}
+        </p>
+        <button type="submit" class="btn btn-primary w-100">Ustvari</button>
+    </div>
+</form>
 
 {% endblock content %}

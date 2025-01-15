@@ -32,12 +32,24 @@ accounts = ([
     path("", views.list_accounts, name = ""),
 ], "accounts")
 
+mountains = ([
+    path('search/', views.mountains, name="search"),
+    path('new', views.create_mountain, name="new"),
+], "mountains")
+
+routes = ([
+    path('search/', views.routes, name="search"),
+    path('new', views.create_route, name="new"),
+],"routes")
+
 apis = ([
     path('render/<str:object>/<uuid:id>/<path:template>', views.render_template, name="render"),
     path('comments/<uuid:id>', views.comments, name="comments"),
     path('comment/<uuid:id>', views.post_comment, name="post_comment"),
     path('news', views.news, name="news"),
     path('reports', views.reports, name="reports"),
+    path('mountains/', include(mountains)),
+    path('routes/', include(routes)),
 ], "api")
 
 

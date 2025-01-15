@@ -169,6 +169,99 @@ def post_comment(req, id):
 
     return render(req, "widgets/comment/new_comment.html", ctx)
 
+# Route
+
+def mountains(req):
+    typ = "mountain"
+    ctx = {}
+
+    ctx["options"] = Mountain.objects.all()
+    ctx["type"] = typ
+
+    if req.method == "GET":
+        return render(req, "widgets/forms/active-option/selector.html", ctx)
+    
+    ctx["search"] = req.POST[typ +"-search"]
+    ctx["options"] = ctx["options"].filter(name__icontains = ctx["search"])
+
+    if not ctx["options"]:
+        res = render(req, "widgets/forms/mountain.html", ctx)
+        res["HX-Trigger"] = "routeUpdate"
+        return res
+
+    res = render(req, "widgets/forms/active-option/options.html", ctx)
+    res["HX-Trigger"] = "routeUpdate"
+    return res
+    
+
+def create_mountain(req):
+    ctx = {}
+    typ = "mountain"
+    ctx["type"] = typ
+    if req.method == "GET":
+        return HttpResponse("make post request with {name: value}")
+    
+    data = req.POST
+    ctx["search"] = data[typ +"-search"]
+
+    if not "name" in data:
+        return HttpResponse("no name")
+    
+    mountain = Mountain()
+    mountain.name = data["name"]
+    mountain.save()
+    ctx["search"] = mountain.name
+    return render(req, "widgets/forms/active-option/selector.html", ctx)
+
+# routes
+
+def routes(req):
+    ctx = {}
+    typ = "route"
+    ctx["type"] = typ
+    ctx["options"] = Route.objects.all()
+
+    if req.method == "GET":
+        return render(req, "widgets/forms/active-option/selector.html", ctx)
+    
+    data = req.POST
+    ctx["search"] = data[typ +"-search"]
+
+    if not "mountain" in data:
+        return HttpResponse("please select a mountain")
+    
+    ctx["options"] = ctx["options"].filter(mountain__id = data["mountain"])
+
+    if not ctx["options"]:
+        gora = get_object_or_404(Mountain, id = data["mountain"])
+        ctx["mountain"] = gora
+        res = render(req, "widgets/forms/route.html", ctx)
+        return res
+    return render(req, "widgets/forms/active-option/options.html", ctx)
+
+def create_route(req):
+    ctx = {}
+    typ = "route"
+    ctx["type"] = typ
+    if req.method == "GET":
+        return HttpResponse("make post request with {name: value}")
+    
+    data = req.POST
+    ctx["search"] = data[typ +"-search"]
+
+    if not "name" in data:
+        return HttpResponse("no name")
+    if not "mountain" in data:
+        return HttpResponse("no mountain")
+    
+    route = Route()
+    route.name = data["name"]
+    route.mountain = get_object_or_404(Mountain, id = data["mountain"])
+    route.save()
+    ctx["search"] = route.name
+    return render(req, "widgets/forms/active-option/selector.html", ctx)
+
+
 # News
 
 def news(req):

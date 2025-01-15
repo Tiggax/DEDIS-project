@@ -1,0 +1,23 @@
+<table>
+    {% for option in options %}
+        <tr>
+            <td>
+                <input 
+                type="radio" 
+                class="btn-check" 
+                name="{{type}}" 
+                value="{{option.id}}" 
+                id="{{type}}-{{option.id}}" 
+                autocomplete="off"
+                {% if forloop.first %}
+                checked="checked"
+                {% endif %}
+                >
+                <label 
+                class="btn" 
+                for="{{type}}-{{option.id}}"
+                >{{option}}</label> 
+            </td>
+        </tr>
+    {% endfor %}
+</table>

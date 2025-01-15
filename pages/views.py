@@ -68,6 +68,7 @@ def edit_report(req, id):
         """
         return render(req, "pages/blank.html", ctx)
     ctx["form"] = ReportForm(instance=report)
+    ctx["default"] = report
     if req.method == "GET":
         return render(req, "pages/reportForm.html", ctx)
     
