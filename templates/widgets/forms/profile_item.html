@@ -1,52 +1,45 @@
-<div class="row border rounded">
-  {% comment %} <div class="col">
-    <div class="row"><input name='name' value='{{data.username}}' disabled="true" ></div>
-    <div class="row"><input name='name' value='{{data.email}}' disabled="true" ></div>
-  </div>
-  <div class="col">
-  <div class="row"><input name='name' value='{{data.first_name}}' disabled="true" ></div>
-  <div class="row"><input name='name' value='{{data.last_name}}' disabled="true" ></div>
-  </div> {% endcomment %}
-
-  <div class="col">
-    <div class="row">
-      <p>
-        Ime: 
+<a class="btn row rounded border-2 m-1 card w-75 bg-secondary" data-bs-toggle="collapse" href="#{{data.username}}-collapser" role="button" aria-expanded="false" aria-controls="{{data.username}}-collapser">  
+  <div class="col text-start">{{data.username}}</div>
+</a>
+<div class="collapse w-75 border-5" id="{{data.username}}-collapser">
+  <div class="card card-body">
+    <div class="col text-end">{{data.email}}</div>
+    <p>
+      Ime: 
+      <div 
+      hx-get="{% url 'accounts:update' 'first_name' data.id %}"
+      hx-target="this"
+      hx-swap="innerHTML"
+      hx-trigger="load, pageUpdate from:body"
+      ></div>
+    </p>
+    <p>
+      Priimek: 
+      <div 
+      hx-get="{% url 'accounts:update' 'last_name' data.id %}"
+      hx-target="this"
+      hx-swap="innerHTML"
+      hx-trigger="load, pageUpdate from:body"
+      ></div>
+    </p>
+    <p>
+      Rank: 
         <div 
-        hx-get="{% url 'accounts:update' 'first_name' data.id %}"
+        hx-get="{% url 'accounts:update' 'rank' data.id %}"
         hx-target="this"
         hx-swap="innerHTML"
         hx-trigger="load, pageUpdate from:body"
-        ></div>
-      </p>
-      <p>
-        Priimek: 
-        <div 
-        hx-get="{% url 'accounts:update' 'last_name' data.id %}"
-        hx-target="this"
-        hx-swap="innerHTML"
-        hx-trigger="load, pageUpdate from:body"
-        ></div>
-      </p>
-      <p>
-        Rank: 
-          <div 
-          hx-get="{% url 'accounts:update' 'rank' data.id %}"
-          hx-target="this"
-          hx-swap="innerHTML"
-          hx-trigger="load, pageUpdate from:body"
-          >
-          </div>
-      </p>
-      <p>
-        Dovoljenja:
-        <div 
-        hx-get="{% url 'accounts:update' 'permission' data.id %}"
-        hx-target="this"
-        hx-swap="innerHTML"
-        hx-trigger="load, pageUpdate from:body"
-        ></div>
-      </p>
-    </div>
+        >
+        </div>
+    </p>
+    <p>
+      Dovoljenja:
+      <div 
+      hx-get="{% url 'accounts:update' 'permission' data.id %}"
+      hx-target="this"
+      hx-swap="innerHTML"
+      hx-trigger="load, pageUpdate from:body"
+      ></div>
+    </p>
   </div>
 </div>
