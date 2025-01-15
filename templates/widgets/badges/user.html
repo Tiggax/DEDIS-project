@@ -1,0 +1,5 @@
+{% load static %}
+<a class="p-0 mx-2"
+href="{% url 'accounts:profile' %}">
+    <img src="{% if user.profile_pic %}{{user.profile_pic.url}}{% else %}{% static 'images/profile-612x612.jpg' %}{% endif %}" alt="" class="rounded mx-auto d-block" width=38 height=38>
+</a>

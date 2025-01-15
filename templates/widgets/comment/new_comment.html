@@ -5,14 +5,19 @@ hx-trigger="submit"
 hx-target="this"
 hx-swap="outerHTML"
 hx-on::after-request="if(event.detail.successful) document.getElementById('note-input').value = ''"
+class=""
 >
+<div class="justify-content-center text-center w-50">
     {% csrf_token %}
-    {{form}}
+    {{form.content}}
+    <div class="">
     <button
     id="comment-submit"
     type="submit"
-    class="btn btn-primary"
+    class="btn btn-primary w-100 ms-1 py-0"
     >Post</button>
+    </div>
+  </div>
 </form>
 {% else %}
 <p>You need to be loged in to post comments!</p>

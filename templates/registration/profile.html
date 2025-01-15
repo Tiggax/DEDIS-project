@@ -2,30 +2,30 @@
 {% load static %}
 
 {% block content %}
-
-<p>{{user.username}}</p>
+<div class="container">
+<div class="pb-1">{{user.username}}</div>
 {% include "widgets/badges/rank.html" %}
 {% include "widgets/badges/permission.html" %}
-<p>{{user.email}}</p>
+<div class="pb-3">{{user.email}}</div>
 
 
-<p>
-    Ime: 
+<div class="pb-2">
+    Ime
     <div 
     hx-get="{% url 'accounts:update' 'first_name' user.id %}"
     hx-target="this"
     hx-swap="outerHTML"
     hx-trigger="load"
     ></div>
-</p>
-<p>
-    Priimek: 
+</div>
+<div>
+    Priimek
     <div 
     hx-get="{% url 'accounts:update' 'last_name' user.id %}"
     hx-target="this"
     hx-swap="outerHTML"
     hx-trigger="load"
     ></div>
-</p>
-
+</div>
+</div>
 {% endblock content %}

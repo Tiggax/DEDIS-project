@@ -7,7 +7,7 @@
     <h2>{{ data.title }}</h2>
     <p class="card-text">{{data.content|safe}}</p>
     <div class="row">
-        <p class="text-body-secondary col">{{data.author}}</p>
+        <p class="text-body-secondary col">{{data.author}}{% include "widgets/badges/rank.html" with user=data.author %}</p>
         <p class="text-body-secondary col text-end">{{data.created}}</p>
     </div>
 
@@ -33,12 +33,14 @@
         hx-trigger="load, submit" 
         hx-target="this" 
         hx-swap="innerHTML"
+        class="px-2"
         >
             <div class="spinner-border" role="status">
                 <span class="sr-only"></span>
             </div>
         </div>
     </div>
+</div>
 {% endblock content %}
 
 {% block p %}

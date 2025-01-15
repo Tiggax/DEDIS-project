@@ -9,13 +9,13 @@
         <div class="row row-cols-1">
         
         <div class="col pb-3">
-        <h2> ZADNJE POROČILO </h2>
+        <h3> ZADNJE POROČILO </h3>
             <div class="">
                 {% include "widgets/report/homecard.html" with data=report %}
             </div>
         </div>
         <div class="col pb-3">
-            <h2> ZADNJE NOVICE </h2>
+            <h3> ZADNJE NOVICE </h3>
             <div class="section border rounded p-2 btn btn-secondary w-75 text-start">
                 <a href="{% url 'pages:news:all' %}" class="list-group-item list-group-item-action">
                 {% include "widgets/news/post.html" with data=news_post %}
