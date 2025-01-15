@@ -5,6 +5,7 @@
     <a href="{% url 'pages:reports:edit' data.id %}">Edit?</a>
     {% endif %}
     <h2>{{ data.title }}</h2>
+    <p><strong>{{data.route}}</strong></p>
     <p class="card-text">{{data.content|safe}}</p>
     <div class="row">
         <p class="text-body-secondary col">{{data.author}}{% include "widgets/badges/rank.html" with user=data.author %}</p>
