@@ -129,7 +129,7 @@ def edit_newspost(req, id):
     
     ctx["form"] = NewsPostForm(instance= news_post)
     if req.method == "GET":
-        return render(req, "pages/NewsPostForm.html", ctx)
+        return render(req, "pages/newsPostForm.html", ctx)
     
     form = NewsPostForm(req.POST, instance=news_post)
 
