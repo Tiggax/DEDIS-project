@@ -1,9 +1,17 @@
+{% extends "wrappers/404.html" %}
+
+{% block content %}
 <a
-    href="{% url 'pages:reports:get' data.id %}"
-    class="btn text-start text-info-emphasis border my-2 p-2 w-75 text-start mb-2"
+href="{% url 'pages:reports:get' data.id %}"
+class="btn text-start text-info-emphasis border my-2 p-2 w-75 text-start mb-2"
 >
-    <div>
-        <p><strong>{{data.title}} - {{data.author}}</strong><p>
+<div>
+    <p><strong>{{data.title}} - {{data.author}}</strong><p>
         <small>{{data.content | safe | truncatechars_html:42}}</small>
     </div>
 </a>
+{% endblock content %}
+
+{% block p %}
+Ta Poročilo ni bil najden ali ni na voljo
+{% endblock p %}
