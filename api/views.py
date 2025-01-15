@@ -202,7 +202,7 @@ def create_mountain(req):
         return HttpResponse("make post request with {name: value}")
     
     data = req.POST
-    ctx["search"] = data[typ +"-search"]
+    ctx["search"] = data["name"]
 
     if not "name" in data:
         return HttpResponse("no name")
@@ -247,7 +247,7 @@ def create_route(req):
         return HttpResponse("make post request with {name: value}")
     
     data = req.POST
-    ctx["search"] = data[typ +"-search"]
+    ctx["search"] = data["name"]
 
     if not "name" in data:
         return HttpResponse("no name")
